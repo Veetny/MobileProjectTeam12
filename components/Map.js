@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, TextInput } from "react-native";
 import MapView from 'react-native-maps';
 import Constants from 'expo-constants';
 
@@ -16,6 +16,23 @@ export default function Map(){
             >
 
             </MapView>
+            <View style={{ position: 'absolute', top: 30, width: '80%' }}>
+    <TextInput
+      style={{
+        borderRadius: 10,
+        margin: 10,
+        color: '#000',
+        borderColor: '#666',
+        backgroundColor: '#FFF',
+        borderWidth: 1,
+        height: 45,
+        paddingHorizontal: 10,
+        fontSize: 18,
+      }}
+      placeholder={'Search'}
+      placeholderTextColor={'#666'}
+    />
+  </View>
         </View>
     )
 }
