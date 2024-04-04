@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform, Pressable } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import Map from './components/Map';
 
@@ -30,10 +30,10 @@ export default function App() {
         drawerPosition="left"
         renderNavigationView={() => (
           <View style={styles.drawerContainer}>
-            <Button title="Close" onPress={closeDrawer} />
+            <Pressable style={styles.ButtonColor} onPress={closeDrawer} ><Text style={styles.Buttontext}>Close</Text></Pressable>
             <Text style={styles.drawerItem}>Forecast</Text>
-            <Text style={styles.drawerItem}>Menu Item 2</Text>
-            <Text style={styles.drawerItem}>Menu Item 3</Text>
+            <Text style={styles.drawerItem}>Present weather</Text>
+            <Text style={styles.drawerItem}>Customize</Text>
           </View>
         )}
       >
@@ -56,6 +56,18 @@ const styles = StyleSheet.create({
   },
   button: {
     maxWidth: 130,
+
+  },
+  ButtonColor: {
+    backgroundColor: '#6C92F3',
+    height: 50,
+    justifyContent: 'center',
+    width: 130,
+    borderRadius: 10,
+  },
+  Buttontext: {
+    fontSize: 20,
+    padding: 10,
   },
   SearchBar: {
     flex: 1,
