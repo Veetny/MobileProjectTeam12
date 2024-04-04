@@ -31,7 +31,7 @@ export default function App() {
         renderNavigationView={() => (
           <View style={styles.drawerContainer}>
             <Button title="Close" onPress={closeDrawer} />
-            <Text style={styles.drawerItem}>Menu Item 1</Text>
+            <Text style={styles.drawerItem}>Forecast</Text>
             <Text style={styles.drawerItem}>Menu Item 2</Text>
             <Text style={styles.drawerItem}>Menu Item 3</Text>
           </View>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#ABD5DE',
     paddingHorizontal: 10,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight -30 : 0,
   },
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     margin: 10,
     color: '#000',
     borderColor: '#666',
-    backgroundColor: '#FFF',
+    backgroundColor: '#D9D9D9',
     borderWidth: 1,
     height: 45,
     paddingHorizontal: 10,
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   drawerContainer: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#45727C',
     paddingLeft: 20,
   },
   drawerItem: {
