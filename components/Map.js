@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, TextInput } from "react-native";
+import { StyleSheet, View, Dimensions, Platform, StatusBar } from "react-native";
 import MapView from 'react-native-maps';
 import Constants from 'expo-constants';
 
@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        
     },
     map: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height - Constants.statusBarHeight,
+        flex: 1,
     }
 })

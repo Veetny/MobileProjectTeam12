@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform, Pressable } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
 import Map from './components/Map';
 
 export default function App() {
@@ -15,61 +14,52 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-      <View style={styles.header}>
-        <Button style={styles.button} title="☰" onPress={openDrawer} />
-        <TextInput style={styles.SearchBar}
-          placeholder={'Search'}
-          placeholderTextColor={'#666'}
-        />
+    <DrawerLayoutAndroid
+      ref={drawerRef}
+      drawerWidth={Dimensions.get('window').width * 0.8}
+      drawerPosition="left"
+      renderNavigationView={() => (
+        <View style={styles.drawerContainer}>
+          <Pressable style={styles.buttonColor} onPress={closeDrawer}><Text style={styles.buttonText}>Close</Text></Pressable>
+          <Text style={styles.drawerItem}>Forecast</Text>
+          <Text style={styles.drawerItem}>Present weather</Text>
+          <Text style={styles.drawerItem}>Customize</Text>
+        </View>
+      )}
+    >
+      <View style={styles.container}>
+        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+        <Map style={styles.map} />
+        <View style={styles.searchContainer}>
+          <Button style={styles.button} title="☰" onPress={openDrawer} />
+          <TextInput style={styles.searchBar}
+            placeholder={'Search'}
+            placeholderTextColor={'#666'}
+          />
+        </View>
       </View>
-      <DrawerLayoutAndroid
-        ref={drawerRef}
-        drawerWidth={Dimensions.get('window').width * 0.8}
-        drawerPosition="left"
-        renderNavigationView={() => (
-          <View style={styles.drawerContainer}>
-            <Pressable style={styles.ButtonColor} onPress={closeDrawer} ><Text style={styles.Buttontext}>Close</Text></Pressable>
-            <Text style={styles.drawerItem}>Forecast</Text>
-            <Text style={styles.drawerItem}>Present weather</Text>
-            <Text style={styles.drawerItem}>Customize</Text>
-          </View>
-        )}
-      >
-        <Map />
-      </DrawerLayoutAndroid>
-    </View>
+    </DrawerLayoutAndroid>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
   },
-  header: {
+  searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ABD5DE',
-    paddingHorizontal: 10,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight -30 : 0,
+    position: 'absolute',
+    top: Platform.OS === 'android' ? StatusBar.currentHeight + 10 : 10,
+    left: 10,
+    right: 10,
+    zIndex: 2,
   },
   button: {
-    maxWidth: 130,
-
+    marginRight: 10,
   },
-  ButtonColor: {
-    backgroundColor: '#6C92F3',
-    height: 50,
-    justifyContent: 'center',
-    width: 130,
-    borderRadius: 10,
-  },
-  Buttontext: {
-    fontSize: 20,
-    padding: 10,
-  },
-  SearchBar: {
+  searchBar: {
     flex: 1,
     borderRadius: 10,
     margin: 10,
@@ -84,10 +74,22 @@ const styles = StyleSheet.create({
   drawerContainer: {
     flex: 1,
     backgroundColor: '#45727C',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     paddingLeft: 20,
+    height: Dimensions.get('window').height - (Platform.OS === 'android' ? StatusBar.currentHeight : 0),
   },
   drawerItem: {
     fontSize: 18,
-    marginBottom: 10,
+  },
+  buttonColor: {
+    backgroundColor: '#6C92F3',
+    height: 50,
+    justifyContent: 'center',
+    width: 130,
+    borderRadius: 10,
+  },
+  buttonText: {
+    fontSize: 20,
+    padding: 10,
   },
 });
