@@ -8,7 +8,7 @@ export default function App() {
   const drawerRef = useRef(null);
   const [showWeathercams, setShowWeathercams] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
-  
+
   const openDrawer = () => {
     drawerRef.current.openDrawer();
   };
@@ -20,11 +20,13 @@ export default function App() {
   const openForecast = () => {
     setShowWeathercams(!showWeathercams);
     setShowCustomize(false);
+    drawerRef.current.closeDrawer();
   };
 
   const openCustomize = () => {
     setShowCustomize(!showCustomize);
     setShowWeathercams(false);
+    drawerRef.current.closeDrawer();
   };
 
   return (
