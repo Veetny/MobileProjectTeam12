@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform, Pressable } from 'react-native';
+import { Icon } from 'react-native-paper';
 import Map from './components/Map';
 import Weathercams from './pages/Weathercams';
 import Customize from './pages/Customize';
