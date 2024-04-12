@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform, Pressable } from 'react-native';
+import { CancelContext, } from './components/Contexts';
 import { Icon } from 'react-native-paper';
 import Map from './components/Map';
 import Weathercams from './pages/Weathercams';
@@ -9,6 +10,8 @@ export default function App() {
   const drawerRef = useRef(null);
   const [showWeathercams, setShowWeathercams] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
+
+  const [cancel, setCancel] = useState([]);
 
   const openDrawer = () => {
     drawerRef.current.openDrawer();
@@ -30,7 +33,13 @@ export default function App() {
     drawerRef.current.closeDrawer();
   };
 
+  const close = () => {
+    setShowCustomize(false);
+    setShowWeathercams(false);
+  }
+
   return (
+
     <DrawerLayoutAndroid
       ref={drawerRef}
       drawerWidth={Dimensions.get('window').width * 0.8}
@@ -63,12 +72,25 @@ export default function App() {
         ) : null}
         
         <View style={styles.searchContainer}>
+        {!showWeathercams && !showCustomize ? (
+          <>
           <Button style={styles.button} title="☰" onPress={openDrawer} />
           <TextInput
             style={styles.searchBar}
             placeholder={'Search'}
             placeholderTextColor={'#666'}
           />
+          </>
+        ) :  (
+          <>
+          <Pressable onPress={close}>
+            <Icon color={'black'} source='close-circle-outline' size={26} />
+          </Pressable>
+          <Button style={styles.button} title="☰" onPress={openDrawer} />
+          </>
+        ) }
+          
+          
         </View>
       </View>
     </DrawerLayoutAndroid>
