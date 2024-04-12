@@ -8,7 +8,7 @@ export default function Settings() {
 
     return (
         <View>
-            <Icon color={'black'} source='close-circle-outline' size={26} />
+            <Text>Moro</Text>
         </View>
 
     );

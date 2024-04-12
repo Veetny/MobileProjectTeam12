@@ -84,7 +84,7 @@ export default function App() {
         ) :  (
           <>
           <Pressable onPress={close}>
-            <Icon color={'black'} source='close-circle-outline' size={26} />
+            <Icon color={'black'} source='close-circle-outline' size={32} />
           </Pressable>
           <Button style={styles.button} title="☰" onPress={openDrawer} />
           </>
