@@ -1,16 +1,30 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform, Pressable } from 'react-native';
 import Map from './components/Map';
+import Weathercams from './pages/Weathercams';
+import Customize from './pages/Customize';
 
 export default function App() {
   const drawerRef = useRef(null);
-
+  const [showWeathercams, setShowWeathercams] = useState(false);
+  const [showCustomize, setShowCustomize] = useState(false);
+  
   const openDrawer = () => {
     drawerRef.current.openDrawer();
   };
 
   const closeDrawer = () => {
     drawerRef.current.closeDrawer();
+  };
+
+  const openForecast = () => {
+    setShowWeathercams(!showWeathercams);
+    setShowCustomize(false);
+  };
+
+  const openCustomize = () => {
+    setShowCustomize(!showCustomize);
+    setShowWeathercams(false);
   };
 
   return (
@@ -20,19 +34,35 @@ export default function App() {
       drawerPosition="left"
       renderNavigationView={() => (
         <View style={styles.drawerContainer}>
-          <Pressable style={styles.buttonColor} onPress={closeDrawer}><Text style={styles.buttonText}>Close</Text></Pressable>
-          <Text style={styles.drawerItem}>Forecast</Text>
-          <Text style={styles.drawerItem}>Present weather</Text>
-          <Text style={styles.drawerItem}>Customize</Text>
+          <Pressable style={styles.buttonColor} onPress={closeDrawer}>
+            <Text style={styles.buttonText}>Close</Text>
+          </Pressable>
+          <Pressable style={styles.buttonColor} onPress={openForecast}>
+            <Text style={styles.drawerItem}>Forecast</Text>
+          </Pressable>
+          <Pressable style={styles.buttonColor} onPress={closeDrawer}>
+            <Text style={styles.drawerItem}>Present weather</Text>
+          </Pressable>
+          <Pressable style={styles.buttonColor} onPress={openCustomize}>
+            <Text style={styles.drawerItem}>Customize</Text>
+          </Pressable>
         </View>
       )}
     >
       <View style={styles.container}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-        <Map style={styles.map} />
+        {!showWeathercams && !showCustomize ? (
+          <Map style={styles.map} />
+        ) : showWeathercams ? (
+          <Weathercams />
+        ) : showCustomize ? (
+          <Customize />
+        ) : null}
+        
         <View style={styles.searchContainer}>
           <Button style={styles.button} title="☰" onPress={openDrawer} />
-          <TextInput style={styles.searchBar}
+          <TextInput
+            style={styles.searchBar}
             placeholder={'Search'}
             placeholderTextColor={'#666'}
           />
