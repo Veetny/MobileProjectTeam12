@@ -64,7 +64,7 @@ export default StyleSheet.create({
         backgroundColor: '#45727C',
     },
     ForecastSearch:{
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         borderRadius: 10,
         marginHorizontal: 20,
@@ -74,7 +74,6 @@ export default StyleSheet.create({
         fontSize: 18,
         borderWidth: 1,
         borderColor: '#666',
-        
     },
     searchIconFore:{
         marginRight: 8,
@@ -82,5 +81,11 @@ export default StyleSheet.create({
     },
     searchInputFore: {
         fontSize: 16,
-    }
+    },
+    listText: {
+        marginTop: 10,
+        fontSize: 16,
+        paddingHorizontal: 20,
+        height: 2000,
+    },
   });
