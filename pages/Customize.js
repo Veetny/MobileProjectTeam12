@@ -8,7 +8,7 @@ export default function Customize() {
 
     return (
         <View>
-            <Text>Moro</Text>
+            <Text>Customize</Text>
         </View>
 
     );
