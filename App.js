@@ -5,12 +5,14 @@ import { Icon } from 'react-native-paper';
 import Map from './components/Map';
 import Weathercams from './pages/Weathercams';
 import Customize from './pages/Customize';
+import Forecast from './pages/Forecast';
+import Weather from './pages/Weather';
 
 export default function App() {
   const drawerRef = useRef(null);
   const [showWeathercams, setShowWeathercams] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
-  const [showForecast, setForecast] = useState(false);
+  const [showForecast, setShowForecast] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
 
   const [cancel, setCancel] = useState([]);
@@ -26,30 +28,40 @@ export default function App() {
   const openWeathercams = () => {
     setShowWeathercams(!showWeathercams);
     setShowCustomize(false);
+    setShowForecast(false);
+    setShowWeather(false);
     drawerRef.current.closeDrawer();
   };
 
   const openCustomize = () => {
     setShowCustomize(!showCustomize);
     setShowWeathercams(false);
+    setShowForecast(false);
+    setShowWeather(false);
     drawerRef.current.closeDrawer();
   };
 
   const openForecast = () => {
-    setShowCustomize(!showCustomize);
+    setShowForecast(!showForecast);
     setShowWeathercams(false);
+    setShowCustomize(false);
+    setShowWeather(false);
     drawerRef.current.closeDrawer();
   };
-  
+
   const openWeather = () => {
-    setShowCustomize(!showCustomize);
+    setShowWeather(!showWeather);
     setShowWeathercams(false);
+    setShowCustomize(false);
+    setShowForecast(false);
     drawerRef.current.closeDrawer();
   };
 
   const close = () => {
     setShowCustomize(false);
     setShowWeathercams(false);
+    setShowForecast(false);
+    setShowWeather(false);
   }
 
   return (
@@ -84,6 +96,10 @@ export default function App() {
           <Map style={styles.map} />
         ) : showWeathercams ? (
           <Weathercams />
+        )  : showForecast ? (
+          <Forecast />
+        ) : showWeather ? (
+          <Weather />
         ) : showCustomize ? (
           <Customize />
         ) : null}
