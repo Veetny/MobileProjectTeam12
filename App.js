@@ -10,6 +10,8 @@ export default function App() {
   const drawerRef = useRef(null);
   const [showWeathercams, setShowWeathercams] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
+  const [showForecast, setForecast] = useState(false);
+  const [showWeather, setShowWeather] = useState(false);
 
   const [cancel, setCancel] = useState([]);
 
@@ -21,7 +23,7 @@ export default function App() {
     drawerRef.current.closeDrawer();
   };
 
-  const openForecast = () => {
+  const openWeathercams = () => {
     setShowWeathercams(!showWeathercams);
     setShowCustomize(false);
     drawerRef.current.closeDrawer();
@@ -32,6 +34,8 @@ export default function App() {
     setShowWeathercams(false);
     drawerRef.current.closeDrawer();
   };
+
+  
 
   const close = () => {
     setShowCustomize(false);
@@ -49,11 +53,14 @@ export default function App() {
           <Pressable style={styles.buttonColor} onPress={closeDrawer}>
             <Text style={styles.buttonText}>Close</Text>
           </Pressable>
+          <Pressable style={styles.buttonColor} onPress={openWeathercams}>
+            <Text style={styles.drawerItem}>Weathercams</Text>
+          </Pressable>
           <Pressable style={styles.buttonColor} onPress={openForecast}>
             <Text style={styles.drawerItem}>Forecast</Text>
           </Pressable>
-          <Pressable style={styles.buttonColor} onPress={closeDrawer}>
-            <Text style={styles.drawerItem}>Present weather</Text>
+          <Pressable style={styles.buttonColor} onPress={openWeather}>
+            <Text style={styles.drawerItem}>Current weather</Text>
           </Pressable>
           <Pressable style={styles.buttonColor} onPress={openCustomize}>
             <Text style={styles.drawerItem}>Customize</Text>
