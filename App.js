@@ -35,7 +35,17 @@ export default function App() {
     drawerRef.current.closeDrawer();
   };
 
+  const openForecast = () => {
+    setShowCustomize(!showCustomize);
+    setShowWeathercams(false);
+    drawerRef.current.closeDrawer();
+  };
   
+  const openWeather = () => {
+    setShowCustomize(!showCustomize);
+    setShowWeathercams(false);
+    drawerRef.current.closeDrawer();
+  };
 
   const close = () => {
     setShowCustomize(false);
