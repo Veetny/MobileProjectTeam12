@@ -53,4 +53,34 @@ export default StyleSheet.create({
       fontSize: 20,
       padding: 10,
     },
+    KymmeniaPaddingeja: {
+    paddingTop: 100,
+    paddingRight: 10,
+    },
+    ForecastContainer:{
+        flex: 1,
+        justifyContent:'top',
+        paddingTop: 75,
+        backgroundColor: '#45727C',
+    },
+    ForecastSearch:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 10,
+        marginHorizontal: 20,
+        backgroundColor: '#D9D9D9',
+        paddingHorizontal: 10,
+        height: 40,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: '#666',
+        
+    },
+    searchIconFore:{
+        marginRight: 8,
+        color: '#6C92F3',
+    },
+    searchInputFore: {
+        fontSize: 16,
+    }
   });
