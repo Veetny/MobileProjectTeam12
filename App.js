@@ -93,7 +93,7 @@ export default function App() {
     >
       <View style={styles.container}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-        {!showWeathercams && !showCustomize ? (
+        {!showWeathercams && !showCustomize && !showForecast && !showWeather ? (
           <Map style={styles.map} />
         ) : showWeathercams ? (
           <Weathercams />
@@ -106,7 +106,7 @@ export default function App() {
         ) : null}
         
         <View style={styles.searchContainer}>
-        {!showWeathercams && !showCustomize ? (
+        {!showWeathercams && !showCustomize && !showForecast && !showWeather ? (
           <>
           <Button style={styles.button} title="☰" onPress={openDrawer} />
           <TextInput
