@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 130,
     borderRadius: 10,
+    margin: 5,
   },
   buttonText: {
     fontSize: 20,
