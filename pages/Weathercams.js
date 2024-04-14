@@ -3,12 +3,37 @@ import { ActivityIndicator, StyleSheet, Text, View, Button, Image } from 'react-
 
 const URL = "https://tie.digitraffic.fi/api/weathercam/v1/stations/C12595";
 
+
+
+
 export default function WeatherCam() {
 
   const [wcam, setWcam] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [refresh, setRefresh] = useState();
+
+
+
+
+    const [weatherCameras, setWeatherCameras] = useState([]);
+  
+    useEffect(() => {
+      fetch('https://tie.digitraffic.fi/api/weathercam/v1/stations')
+        .then(response => response.json())
+        .then(data => {
+          setWeatherCameras(data.features);
+        })
+        .catch(error => console.error('Error fetching weather cameras:', error));
+    }, []);
+  
+    const findCamerasInOulu = () => {
+      const ouluCameras = weatherCameras.filter(camera => camera.properties.name.includes('Helsinki'));
+      const ouluCameraIds = ouluCameras.map(camera => camera.properties.id);
+      console.log('Weather Cameras in Oulu:', ouluCameraIds);
+    };
+  
+    
 
 
   useEffect(() => {
@@ -42,7 +67,11 @@ export default function WeatherCam() {
           style={styles.image}
           onError={(error) => console.log("Image loading error:", error)}
         />
-        <Button title="Refresh" onPress={() => getNewWcam()}></Button>
+        <Button title="Refresh" onPress={() => getNewWcam}></Button>
+        <View>
+        <Text>Weather Cameras in Oulu</Text>
+        <Text onPress={findCamerasInOulu}>Click to find</Text>
+      </View>
       </View>
     );
   }
