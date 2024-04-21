@@ -1,13 +1,15 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Platform, StatusBar, Alert } from "react-native";
+import { StyleSheet, View, Dimensions, Platform, StatusBar, Alert, Image } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
 import Constants from 'expo-constants';
 import styles from "../styles/style";
 
 export default function Map() {
+    const images = "https://weathercam.digitraffic.fi/C1259501.jpg"
     const handleMapMarker = () => {
+        
         //https://weathercam.digitraffic.fi/C1259501.jpg
-        Alert.alert("Tampere", "Bababooey");
+        Alert.alert("Tampere");
     };
     return (
         <View style={styles.container}>
@@ -24,6 +26,8 @@ export default function Map() {
             longitude: 23.769505}}
             title={"title"}
             description={"description"}
+            pinColor="blue"
+            onPress={handleMapMarker}
          />
       
             </MapView>
