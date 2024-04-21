@@ -19,14 +19,13 @@ export default function Map() {
                     longitudeDelta: 11.1421,
                 }}
             >
-                <Marker
-                    coordinate={{
-                        latitude: 61.462733,
-                        longitude: 23.769505,
-                    }}
-                    pinColor="blue"
-                    onPress={handleMapMarker}
-                />
+        <Marker
+            coordinate={{latitude: 61.462733,
+            longitude: 23.769505}}
+            title={"title"}
+            description={"description"}
+         />
+      
             </MapView>
         </View>
     )
