@@ -1,11 +1,16 @@
 import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndroid, TextInput, Platform, Pressable } from 'react-native';
-
+import Constants from 'expo-constants';
 
 
 export default StyleSheet.create({
     container: {
       flex: 1,
       position: 'relative',
+    },
+    map: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height - Constants.statusBarHeight,
+      flex: 1,
     },
     searchContainer: {
       flexDirection: 'row',

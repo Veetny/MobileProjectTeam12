@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, Platform, StatusBar } from "react-native";
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Constants from 'expo-constants';
+import styles from "../styles/style";
 
 export default function Map() {
     return (
@@ -19,16 +20,3 @@ export default function Map() {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        
-    },
-    map: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height - Constants.statusBarHeight,
-        flex: 1,
-    }
-})
