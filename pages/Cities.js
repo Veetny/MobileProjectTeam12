@@ -16,15 +16,6 @@ export default function Forecast() {
 
     return (
         <View style={styles.ForecastContainer}>
-            <View style={styles.ForecastSearch}>
-                <Text style={styles.KymmeniaPaddingeja}></Text>
-                <Icon name="search" size={24} style={styles.searchIconFore} />
-                <TextInput
-                    style={styles.searchInputFore}
-                    placeholder="Search..."
-                    value={searchQuery}
-                    onChangeText={handleSearch}
-                />
                 <Text style={styles.listText}>
                 <Pressable onPress={toHelsinki}><Text>Helsinki</Text></Pressable>
                 {"\n"}
@@ -64,9 +55,8 @@ export default function Forecast() {
                 {"\n"}
                 <Pressable><Text>Kotka</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Salo</Text></Pressable>
+                <Pressable><Text>Tommi Salo</Text></Pressable>
                 </Text>
-            </View>
         </View>
 
     );
