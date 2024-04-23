@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { Icon } from 'react-native-paper';
 import styles from "../styles/style";
 
+import { Citiesopen, CameraStationsOpen } from '../components/Contexts';
+
 
 export default function Forecast() {
     const [searchQuery, setSearchQuery] = ('');
+
+    const { setShowCameraStations } = useContext(CameraStationsOpen);
+    const { setShowForecast } = useContext(Citiesopen);
 
     const handleSearch = (text) => {
         setSearchQuery(text);
     };
     const toHelsinki = () => {
         console.log("clickattu");
+        setShowCameraStations(true);
+        setShowForecast(false);
     };
 
     return (

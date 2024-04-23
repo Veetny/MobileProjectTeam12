@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import styles from "../styles/style";
+
+import { Citiesopen, CameraStationsOpen } from '../components/Contexts';
 
 export default function CameraStations() {
     const [weatherCameras, setWeatherCameras] = useState([]);
     const [ouluCameraIds, setOuluCameraIds] = useState([]);
     const [stationNames, setStationNames] = useState([]);
     const URL = "https://tie.digitraffic.fi/api/weathercam/v1/stations";
+
+    const { showCities } = useContext(Citiesopen);
+    
 
     useEffect(() => {
         fetch(URL)

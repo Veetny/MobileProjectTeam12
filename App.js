@@ -10,12 +10,16 @@ import Weather from './pages/Weather';
 import styles from './styles/style';
 import CameraStations from './pages/CameraStations';
 
+import { Citiesopen, CameraStationsOpen } from './components/Contexts';
+
 export default function App() {
   const drawerRef = useRef(null);
   const [showWeathercams, setShowWeathercams] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [showForecast, setShowForecast] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
+  const [showMap, setShowMap] = useState(true);
+  const [showCameraStations, setShowCameraStations] = useState(false);
 
   const [cancel, setCancel] = useState([]);
 
@@ -32,6 +36,8 @@ export default function App() {
     setShowCustomize(false);
     setShowForecast(false);
     setShowWeather(false);
+    setShowMap(false);
+    setShowCameraStations(false);
     drawerRef.current.closeDrawer();
   };
 
@@ -40,14 +46,18 @@ export default function App() {
     setShowWeathercams(false);
     setShowForecast(false);
     setShowWeather(false);
+    setShowMap(false);
+    setShowCameraStations(false);
     drawerRef.current.closeDrawer();
   };
 
   const openForecast = () => {
-    setShowForecast(!showForecast);
+    setShowForecast(!showCameraStations);
     setShowWeathercams(false);
     setShowCustomize(false);
     setShowWeather(false);
+    setShowMap(false);
+    setShowCameraStations(false);
     drawerRef.current.closeDrawer();
   };
 
@@ -56,6 +66,8 @@ export default function App() {
     setShowWeathercams(false);
     setShowCustomize(false);
     setShowForecast(false);
+    setShowMap(false);
+    setShowCameraStations(false);
     drawerRef.current.closeDrawer();
   };
 
@@ -64,72 +76,79 @@ export default function App() {
     setShowWeathercams(false);
     setShowForecast(false);
     setShowWeather(false);
+    setShowCameraStations(false);
+    setShowMap(true);
   }
 
   return (
+    <Citiesopen.Provider value={{ showForecast, setShowForecast }}>
+      <CameraStationsOpen.Provider value={{ showCameraStations, setShowCameraStations }}>
+        <DrawerLayoutAndroid
+          ref={drawerRef}
+          drawerWidth={Dimensions.get('window').width * 0.8}
+          drawerPosition="left"
+          renderNavigationView={() => (
+            <View style={styles.drawerContainer}>
+              <Pressable style={styles.buttonColor} onPress={closeDrawer}>
+                <Text style={styles.buttonText}>Close</Text>
+              </Pressable>
+              <Pressable style={styles.buttonColor} onPress={openWeathercams}>
+                <Text style={styles.drawerItem}>Weathercams</Text>
+              </Pressable>
+              <Pressable style={styles.buttonColor} onPress={openForecast}>
+                <Text style={styles.drawerItem}>Forecast</Text>
+              </Pressable>
+              <Pressable style={styles.buttonColor} onPress={openWeather}>
+                <Text style={styles.drawerItem}>Current weather</Text>
+              </Pressable>
+              <Pressable style={styles.buttonColor} onPress={openCustomize}>
+                <Text style={styles.drawerItem}>Customize</Text>
+              </Pressable>
+            </View>
+          )}
+        >
+          <View style={styles.container}>
+            <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+            {showMap ? (
+              <Map style={styles.map} />
+            ) : showWeathercams ? (
+              <Weathercams />
+            ) : showForecast ? (
+              <Cities />
+            ) : showWeather ? (
+              <Weather />
+            ) : showCustomize ? (
+              <Customize />
+            ) : showCameraStations ? (
+              <CameraStations />
+            ) : null}
 
-    <DrawerLayoutAndroid
-      ref={drawerRef}
-      drawerWidth={Dimensions.get('window').width * 0.8}
-      drawerPosition="left"
-      renderNavigationView={() => (
-        <View style={styles.drawerContainer}>
-          <Pressable style={styles.buttonColor} onPress={closeDrawer}>
-            <Text style={styles.buttonText}>Close</Text>
-          </Pressable>
-          <Pressable style={styles.buttonColor} onPress={openWeathercams}>
-            <Text style={styles.drawerItem}>Weathercams</Text>
-          </Pressable>
-          <Pressable style={styles.buttonColor} onPress={openForecast}>
-            <Text style={styles.drawerItem}>Forecast</Text>
-          </Pressable>
-          <Pressable style={styles.buttonColor} onPress={openWeather}>
-            <Text style={styles.drawerItem}>Current weather</Text>
-          </Pressable>
-          <Pressable style={styles.buttonColor} onPress={openCustomize}>
-            <Text style={styles.drawerItem}>Customize</Text>
-          </Pressable>
-        </View>
-      )}
-    >
-      <View style={styles.container}>
-        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-        {!showWeathercams && !showCustomize && !showForecast && !showWeather ? (
-          <CameraStations />
-          //<Map style={styles.map} />
-        ) : showWeathercams ? (
-          <Weathercams />
-        )  : showForecast ? (
-          <Cities />
-        ) : showWeather ? (
-          <Weather />
-        ) : showCustomize ? (
-          <Customize />
-        ) : null}
-        
-        <View style={styles.searchContainer}>
-        {!showWeathercams && !showCustomize && !showForecast && !showWeather ? (
-          <>
-          <Button style={styles.button} title="☰" onPress={openDrawer} />
-          <TextInput
-            style={styles.searchBar}
-            placeholder={'Search'}
-            placeholderTextColor={'#666'}
-          />
-          </>
-        ) :  (
-          <>
-          <Pressable onPress={close}>
-            <Icon color={'black'} source='close-circle-outline' size={32} />
-          </Pressable>
-          <Button style={styles.button} title="☰" onPress={openDrawer} />
-          </>
-        ) }
-          
-          
-        </View>
-      </View>
-    </DrawerLayoutAndroid>
+            <View style={styles.searchContainer}>
+              {!showWeathercams && !showCustomize && !showForecast && !showWeather ? (
+                <>
+                  <Button style={styles.button} title="☰" onPress={openDrawer} />
+                  <TextInput
+                    style={styles.searchBar}
+                    placeholder={'Search'}
+                    placeholderTextColor={'#666'}
+                  />
+                </>
+              ) : (
+                <>
+                  <Pressable onPress={close}>
+                    <Icon color={'black'} source='close-circle-outline' size={32} />
+                  </Pressable>
+                  <Button style={styles.button} title="☰" onPress={openDrawer} />
+                </>
+              )}
+
+
+            </View>
+          </View>
+        </DrawerLayoutAndroid>
+      </CameraStationsOpen.Provider>
+    </Citiesopen.Provider>
+
   );
 }
 
