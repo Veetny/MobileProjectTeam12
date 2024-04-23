@@ -8,6 +8,7 @@ import Customize from './pages/Customize';
 import Forecast from './pages/Forecast';
 import Weather from './pages/Weather';
 import styles from './styles/style';
+import CameraStations from './pages/CameraStations';
 
 export default function App() {
   const drawerRef = useRef(null);
@@ -94,7 +95,8 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
         {!showWeathercams && !showCustomize && !showForecast && !showWeather ? (
-          <Map style={styles.map} />
+          <CameraStations />
+          //<Map style={styles.map} />
         ) : showWeathercams ? (
           <Weathercams />
         )  : showForecast ? (

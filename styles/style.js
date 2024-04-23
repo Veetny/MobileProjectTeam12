@@ -93,4 +93,10 @@ export default StyleSheet.create({
         paddingHorizontal: 20,
         height: 2000,
     },
+    textItem1:{
+      margin: 5
+    },
+    contentContainer1:{
+      minWidth: '100%'
+    }
   });
