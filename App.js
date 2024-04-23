@@ -5,7 +5,7 @@ import { Icon } from 'react-native-paper';
 import Map from './components/Map';
 import Weathercams from './pages/Weathercams';
 import Customize from './pages/Customize';
-import Forecast from './pages/Forecast';
+import Cities from './pages/Cities';
 import Weather from './pages/Weather';
 import styles from './styles/style';
 import CameraStations from './pages/CameraStations';
@@ -100,7 +100,7 @@ export default function App() {
         ) : showWeathercams ? (
           <Weathercams />
         )  : showForecast ? (
-          <Forecast />
+          <Cities />
         ) : showWeather ? (
           <Weather />
         ) : showCustomize ? (
