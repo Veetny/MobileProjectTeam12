@@ -3,7 +3,8 @@ import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import { Icon } from 'react-native-paper';
 import styles from "../styles/style";
 
-import { Citiesopen, CameraStationsOpen } from '../components/Contexts';
+import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
+
 
 
 export default function Forecast() {
@@ -11,12 +12,14 @@ export default function Forecast() {
 
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setShowForecast } = useContext(Citiesopen);
+    const { setChosenCity } = useContext(City);
 
     const handleSearch = (text) => {
         setSearchQuery(text);
     };
     const toHelsinki = () => {
         console.log("clickattu");
+        setChosenCity("Helsinki");
         setShowCameraStations(true);
         setShowForecast(false);
     };

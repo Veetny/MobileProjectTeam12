@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import styles from "../styles/style";
 
-import { Citiesopen, CameraStationsOpen } from '../components/Contexts';
+import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
 
 export default function CameraStations() {
     const [weatherCameras, setWeatherCameras] = useState([]);
@@ -11,6 +11,7 @@ export default function CameraStations() {
     const URL = "https://tie.digitraffic.fi/api/weathercam/v1/stations";
 
     const { showCities } = useContext(Citiesopen);
+    const { chosenCity } = useContext(City);
     
 
     useEffect(() => {
@@ -18,7 +19,7 @@ export default function CameraStations() {
             .then(response => response.json())
             .then(data => {
                 setWeatherCameras(data.features);
-                const ouluCameras = data.features.filter(camera => camera.properties.name.includes('Oulu'));
+                const ouluCameras = data.features.filter(camera => camera.properties.name.includes(chosenCity));
                 const ouluCameraIds = ouluCameras.map(camera => camera.properties.id);
                 setOuluCameraIds(ouluCameraIds);
             })
