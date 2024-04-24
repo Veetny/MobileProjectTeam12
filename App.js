@@ -53,7 +53,7 @@ export default function App() {
   };
 
   const openForecast = () => {
-    setShowForecast(!showCameraStations);
+    setShowForecast(true);
     setShowWeathercams(false);
     setShowCustomize(false);
     setShowWeather(false);
