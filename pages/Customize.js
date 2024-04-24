@@ -4,28 +4,43 @@ import { RadioButton } from 'react-native-paper';
 
 export default function Customize() {
     const [checked, setChecked] = useState('first');
+    const [blueMode, setBlueMode] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
+
+    const toggleBlueMode = () => {
+        setBlueMode(!blueMode);
+    };
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
     };
 
-    const containerStyle = darkMode ? styles.darkContainer : styles.lightContainer;
-    const textStyle = darkMode ? styles.darkText : styles.lightText;
+    const containerStyle = () => {
+        if (blueMode) return styles.blueContainer;
+        if (darkMode) return styles.darkContainer;
+        return styles.defaultContainer;
+    };
+
+    const textStyle = () => {
+        if (blueMode) return styles.blueText;
+        if (darkMode) return styles.darkText;
+        return styles.defaultText;
+    };
 
     return (
-        <View style={[styles.container, containerStyle]}>
-            <Text style={textStyle}>Customize</Text>
+        <View style={[styles.container, containerStyle()]}>
+            <Text style={textStyle()}>Customize</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RadioButton
                     value="first"
                     status={ checked === 'first' ? 'checked' : 'unchecked' }
                     onPress={() => {
                         setChecked('first');
-                        setDarkMode(false); // Reset to default mode
+                        setBlueMode(false);
+                        setDarkMode(false);
                     }}
                 />
-                <Text style={textStyle}>Default</Text>
+                <Text style={textStyle()}>Light mode</Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RadioButton
@@ -33,10 +48,11 @@ export default function Customize() {
                     status={ checked === 'second' ? 'checked' : 'unchecked' }
                     onPress={() => {
                         setChecked('second');
-                        setDarkMode(false); // Reset to default mode
+                        setBlueMode(true);
+                        setDarkMode(false);
                     }}
                 />
-                <Text style={textStyle}>Light Mode</Text>
+                <Text style={textStyle()}>Default</Text>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RadioButton
@@ -44,10 +60,11 @@ export default function Customize() {
                     status={ checked === 'third' ? 'checked' : 'unchecked' }
                     onPress={() => {
                         setChecked('third');
-                        setDarkMode(true); // Enable dark mode
+                        setBlueMode(false);
+                        setDarkMode(true);
                     }}
                 />
-                <Text style={textStyle}>Dark Mode</Text>
+                <Text style={textStyle()}>Dark mode</Text>
             </View>
         </View>
     );
@@ -59,14 +76,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    lightContainer: {
+    defaultContainer: {
         backgroundColor: 'white',
+    },
+    blueContainer: {
+        backgroundColor: 'blue',
     },
     darkContainer: {
         backgroundColor: 'black',
     },
-    lightText: {
+    defaultText: {
         color: 'black',
+        fontSize: 20,
+    },
+    blueText: {
+        color: 'white',
         fontSize: 20,
     },
     darkText: {
