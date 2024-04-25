@@ -98,5 +98,31 @@ export default StyleSheet.create({
     },
     contentContainer1:{
       minWidth: '100%'
-    }
+    },
+    CustomizeContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  defaultContainer: {
+      backgroundColor: 'white',
+  },
+  blueContainer: {
+      backgroundColor: 'blue',
+  },
+  darkContainer: {
+      backgroundColor: 'black',
+  },
+  defaultText: {
+      color: 'black',
+      fontSize: 20,
+  },
+  blueText: {
+      color: 'white',
+      fontSize: 20,
+  },
+  darkText: {
+      color: 'white',
+      fontSize: 20,
+  },
   });
