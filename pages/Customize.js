@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { RadioButton } from 'react-native-paper';
+import styles from "../styles/style";
 
 export default function Customize() {
     const [checked, setChecked] = useState('first');
@@ -28,7 +29,7 @@ export default function Customize() {
     };
 
     return (
-        <View style={[styles.container, containerStyle()]}>
+        <View style={[styles.CustomizeContainer, containerStyle()]}>
             <Text style={textStyle()}>Customize</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <RadioButton
@@ -68,33 +69,5 @@ export default function Customize() {
             </View>
         </View>
     );
-}
+};
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    defaultContainer: {
-        backgroundColor: 'white',
-    },
-    blueContainer: {
-        backgroundColor: 'blue',
-    },
-    darkContainer: {
-        backgroundColor: 'black',
-    },
-    defaultText: {
-        color: 'black',
-        fontSize: 20,
-    },
-    blueText: {
-        color: 'white',
-        fontSize: 20,
-    },
-    darkText: {
-        color: 'white',
-        fontSize: 20,
-    },
-});
