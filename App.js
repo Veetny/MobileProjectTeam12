@@ -33,7 +33,7 @@ export default function App() {
   };
 
   const openWeathercams = () => {
-    setShowWeathercams(!showWeathercams);
+    setShowWeathercams(true);
     setShowCustomize(false);
     setShowForecast(false);
     setShowWeather(false);
@@ -43,7 +43,7 @@ export default function App() {
   };
 
   const openCustomize = () => {
-    setShowCustomize(!showCustomize);
+    setShowCustomize(true);
     setShowWeathercams(false);
     setShowForecast(false);
     setShowWeather(false);
@@ -63,7 +63,7 @@ export default function App() {
   };
 
   const openWeather = () => {
-    setShowWeather(!showWeather);
+    setShowWeather(true);
     setShowWeathercams(false);
     setShowCustomize(false);
     setShowForecast(false);
