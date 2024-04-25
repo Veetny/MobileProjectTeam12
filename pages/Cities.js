@@ -18,8 +18,102 @@ export default function Forecast() {
         setSearchQuery(text);
     };
     const toHelsinki = () => {
-        console.log("clickattu");
         setChosenCity("Helsinki");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toEspoo = () => {
+        setChosenCity("Espoo");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toTampere = () => {
+        setChosenCity("Tampere");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toVantaa = () => {
+        setChosenCity("Vantaa");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toOulu = () => {
+        setChosenCity("Oulu");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toTurku = () => {
+        setChosenCity("Turku");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toJyväskylä = () => {
+        setChosenCity("Jyväskylä");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toLahti = () => {
+        setChosenCity("Lahti");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toKuopio = () => {
+        setChosenCity("Kuopio");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toPori = () => {
+        setChosenCity("Pori");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toKouvola = () => {
+        setChosenCity("Kouvola");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toJoensuu = () => {
+        setChosenCity("Joensuu");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toLappeenranta = () => {
+        setChosenCity("Lappeenranta");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toHämeenlinna = () => {
+        setChosenCity("Hämeenlinna");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toVaasa = () => {
+        setChosenCity("Vaasa");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toSeinäjoki = () => {
+        setChosenCity("Seinäjoki");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toRovaniemi = () => {
+        setChosenCity("Rovaniemi");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toMikkeli = () => {
+        setChosenCity("Mikkeli");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toKotka = () => {
+        setChosenCity("Kotka");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toSalo = () => {
+        setChosenCity("Salo");
         setShowCameraStations(true);
         setShowForecast(false);
     };
@@ -29,43 +123,43 @@ export default function Forecast() {
                 <Text style={styles.listText}>
                 <Pressable onPress={toHelsinki}><Text>Helsinki</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Espoo</Text></Pressable>
+                <Pressable onPress={toEspoo}><Text>Espoo</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Tampere</Text></Pressable>
+                <Pressable onPress={toTampere}><Text>Tampere</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Vantaa</Text></Pressable>
+                <Pressable onPress={toVantaa}><Text>Vantaa</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Oulu</Text></Pressable>
+                <Pressable onPress={toOulu}><Text>Oulu</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Turku</Text></Pressable>
+                <Pressable onPress={toTurku}><Text>Turku</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Jyväskylä</Text></Pressable>
+                <Pressable onPress={toJyväskylä}><Text>Jyväskylä</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Lahti</Text></Pressable>
+                <Pressable onPress={toLahti}><Text>Lahti</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Kuopio</Text></Pressable>
+                <Pressable onPress={toKuopio}><Text>Kuopio</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Pori</Text></Pressable>
+                <Pressable onPress={toPori}><Text>Pori</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Kouvola</Text></Pressable>
+                <Pressable onPress={toKouvola}><Text>Kouvola</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Joensuu</Text></Pressable>
+                <Pressable onPress={toJoensuu}><Text>Joensuu</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Lappeenranta</Text></Pressable>
+                <Pressable onPress={toLappeenranta}><Text>Lappeenranta</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Hämeenlinna</Text></Pressable>
+                <Pressable onPress={toHämeenlinna}><Text>Hämeenlinna</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Vaasa</Text></Pressable>
+                <Pressable onPress={toVaasa}><Text>Vaasa</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Seinäjoki</Text></Pressable>
+                <Pressable onPress={toSeinäjoki}><Text>Seinäjoki</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Rovaniemi</Text></Pressable>
+                <Pressable onPress={toRovaniemi}><Text>Rovaniemi</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Mikkeli</Text></Pressable>
+                <Pressable onPress={toMikkeli}><Text>Mikkeli</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Kotka</Text></Pressable>
+                <Pressable onPress={toKotka}><Text>Kotka</Text></Pressable>
                 {"\n"}
-                <Pressable><Text>Tommi Salo</Text></Pressable>
+                <Pressable onPress={toSalo}><Text>Tommi Salo</Text></Pressable>
                 </Text>
         </View>
 
