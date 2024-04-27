@@ -15,8 +15,8 @@ export default function Map() {
             "This is an alert message with a button",
             [
                 {
-                    text: "OK",
-                    onPress: () => console.log("OK Pressed")
+                    text: "Open Cities",
+                    onPress: OpenCities
                 },
                 {
                     text: "OK2",
@@ -24,6 +24,11 @@ export default function Map() {
                 }
             ]
         );
+    };
+
+    const OpenCities = () => {
+        setShowMap(false);
+        setShowForecast(true);
     };
 
     const handleMapMarker = () => {
