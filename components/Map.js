@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, Platform, StatusBar, Alert, Image } from "react-native";
+import { StyleSheet, View, Dimensions, Platform, StatusBar, Alert, Image, TouchableOpacity, Text } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
 import Constants from 'expo-constants';
 import styles from "../styles/style";
@@ -7,13 +7,32 @@ import styles from "../styles/style";
 export default function Map() {
     const images = "https://weathercam.digitraffic.fi/C1259501.jpg"
     const handleMapMarkerMaik = () => {
-        
-        Alert.alert("Oulun pylly osa 2");
+        Alert.alert(
+            "Oulun pylly osa 2",
+            "This is an alert message with a button",
+            [
+                {
+                    text: "OK",
+                    onPress: () => console.log("OK Pressed")
+                }
+            ]
+        );
     };
+
     const handleMapMarker = () => {
-        
-        Alert.alert("Tampere");
+        Alert.alert(
+            "Tampere",
+            "This is an alert message with a button",
+            [
+                {
+                    
+                    text: "OK",
+                    onPress: () => console.log("OK Pressed")
+                }
+            ]
+        );
     };
+
     return (
         <View style={styles.container}>
             <MapView style={styles.map}
@@ -24,23 +43,20 @@ export default function Map() {
                     longitudeDelta: 11.1421,
                 }}
             >
-        <Marker
-            coordinate={{latitude: 61.462733,
-            longitude: 23.769505}}
-            title={"Tampere"}
-            description={"description"}
-            pinColor="blue"
-            onPress={handleMapMarker}
-         />
-         <Marker
-            coordinate={{latitude: 64.980371,
-            longitude: 25.561628}}
-            title={"Oulun pylly"}
-            description={"description"}
-            pinColor="green"
-            onPress={handleMapMarkerMaik}
-         />
-      
+                <Marker
+                    coordinate={{latitude: 61.462733, longitude: 23.769505}}
+                    title={"Tampere"}
+                    description={"description"}
+                    pinColor="blue"
+                    onPress={handleMapMarker}
+                />
+                <Marker
+                    coordinate={{latitude: 64.980371, longitude: 25.561628}}
+                    title={"Oulun pylly"}
+                    description={"description"}
+                    pinColor="green"
+                    onPress={handleMapMarkerMaik}
+                />
             </MapView>
         </View>
     )
