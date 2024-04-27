@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View, Dimensions, Platform, StatusBar, Alert, Image, TouchableOpacity, Text } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
 import Constants from 'expo-constants';
 import styles from "../styles/style";
+import { MapOpen, Citiesopen } from "./Contexts";
 
 export default function Map() {
+    const { setShowMap } = useContext(MapOpen);
+    const { setShowForecast } = useContext(Citiesopen);
     const images = "https://weathercam.digitraffic.fi/C1259501.jpg"
     const handleMapMarkerMaik = () => {
         Alert.alert(
-            "Oulun pylly osa 2",
+            "Who killed captain alex",
             "This is an alert message with a button",
             [
                 {
