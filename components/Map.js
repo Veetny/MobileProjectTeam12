@@ -6,6 +6,10 @@ import styles from "../styles/style";
 
 export default function Map() {
     const images = "https://weathercam.digitraffic.fi/C1259501.jpg"
+    const handleMapMarkerMaik = () => {
+        
+        Alert.alert("Oulun pylly osa 2");
+    };
     const handleMapMarker = () => {
         
         Alert.alert("Tampere");
@@ -34,7 +38,7 @@ export default function Map() {
             title={"Oulun pylly"}
             description={"description"}
             pinColor="green"
-            onPress={handleMapMarker}
+            onPress={handleMapMarkerMaik}
          />
       
             </MapView>
