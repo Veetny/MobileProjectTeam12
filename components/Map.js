@@ -14,6 +14,10 @@ export default function Map() {
                 {
                     text: "OK",
                     onPress: () => console.log("OK Pressed")
+                },
+                {
+                    text: "OK2",
+                    onPress: () => console.log("OK Pressed2")
                 }
             ]
         );
