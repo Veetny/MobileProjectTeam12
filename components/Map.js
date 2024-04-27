@@ -8,7 +8,6 @@ export default function Map() {
     const images = "https://weathercam.digitraffic.fi/C1259501.jpg"
     const handleMapMarker = () => {
         
-        //https://weathercam.digitraffic.fi/C1259501.jpg
         Alert.alert("Tampere");
     };
     return (
@@ -24,9 +23,17 @@ export default function Map() {
         <Marker
             coordinate={{latitude: 61.462733,
             longitude: 23.769505}}
-            title={"title"}
+            title={"Tampere"}
             description={"description"}
             pinColor="blue"
+            onPress={handleMapMarker}
+         />
+         <Marker
+            coordinate={{latitude: 64.980371,
+            longitude: 25.561628}}
+            title={"Oulun pylly"}
+            description={"description"}
+            pinColor="green"
             onPress={handleMapMarker}
          />
       
