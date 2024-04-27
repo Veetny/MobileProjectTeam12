@@ -188,6 +188,20 @@ export default function Map() {
                     pinColor="brown"
                     onPress={handleMapMarker}
                 />
+                <Marker
+                    coordinate={{latitude: 65.9667, longitude: 29.1667}}
+                    title={"Kuusamo"}
+                    description={"description"}
+                    pinColor="red"
+                    onPress={handleMapMarker}
+                />
+                <Marker
+                    coordinate={{latitude: 68.9055, longitude: 27.0176}}
+                    title={"Inari"}
+                    description={"description"}
+                    pinColor="red"
+                    onPress={handleMapMarker}
+                />
             </MapView>
         </View>
     )

@@ -117,6 +117,16 @@ export default function Forecast() {
         setShowCameraStations(true);
         setShowForecast(false);
     };
+    const toKuusamo = () => {
+        setChosenCity("Kuusamo");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toInari = () => {
+        setChosenCity("Inari");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
 
     return (
         <View style={styles.ForecastContainer}>
@@ -160,6 +170,10 @@ export default function Forecast() {
                 <Pressable onPress={toKotka}><Text>Kotka</Text></Pressable>
                 {"\n"}
                 <Pressable onPress={toSalo}><Text>Tommi Salo</Text></Pressable>
+                {"\n"}
+                <Pressable onPress={toKuusamo}><Text>Kuusamo</Text></Pressable>
+                {"\n"}
+                <Pressable onPress={toInari}><Text>Inari</Text></Pressable>
                 </Text>
         </View>
 
