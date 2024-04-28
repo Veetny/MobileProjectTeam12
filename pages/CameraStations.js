@@ -83,7 +83,7 @@ export default function CameraStations() {
     return (
         <View style={styles.KymmeniaPaddingeja}>
             <View>
-                <FlatList
+                <FlatList style={styles.stationContainer}
                     data={stationNames}
                     renderItem={({ item, index }) => (
                         <Pressable onPress={() => handleStationPress(item, stationIds[index])}>
