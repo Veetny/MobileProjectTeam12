@@ -192,6 +192,20 @@ export default function Map() {
                     pinColor="red"
                     onPress={() => handleMapMarker("Inari")}
                 />
+                <Marker
+                    coordinate={{latitude: 68.3840, longitude: 23.6354}}
+                    title={"Enontekiö"}
+                    description={"description"}
+                    pinColor="yellow"
+                    onPress={() => handleMapMarker("Enontekiö")}
+                />
+                <Marker
+                    coordinate={{latitude: 67.4149, longitude: 26.5907}}
+                    title={"Sodankylä"}
+                    description={"description"}
+                    pinColor="blue"
+                    onPress={() => handleMapMarker("Sodankylä")}
+                />
             </MapView>
         </View>
     )

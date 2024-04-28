@@ -127,6 +127,16 @@ export default function Forecast() {
         setShowCameraStations(true);
         setShowForecast(false);
     };
+    const toEnontekiö = () => {
+        setChosenCity("Enontekiö");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toSodankylä = () => {
+        setChosenCity("Sodankylä");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
 
     return (
         <View style={styles.ForecastContainer}>
@@ -174,6 +184,10 @@ export default function Forecast() {
                 <Pressable onPress={toKuusamo}><Text>Kuusamo</Text></Pressable>
                 {"\n"}
                 <Pressable onPress={toInari}><Text>Inari</Text></Pressable>
+                {"\n"}
+                <Pressable onPress={toEnontekiö}><Text>Enontekiö</Text></Pressable>
+                {"\n"}
+                <Pressable onPress={toSodankylä}><Text>Enontekiö</Text></Pressable>
                 </Text>
         </View>
 
