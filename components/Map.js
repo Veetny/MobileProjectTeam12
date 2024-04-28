@@ -123,6 +123,13 @@ export default function Map() {
                     onPress={() => handleMapMarker("Kouvola")}
                 />
                 <Marker
+                    coordinate={{latitude: 60.4517, longitude: 22.2700}}
+                    title={"Turku"}
+                    description={"description"}
+                    pinColor="maroon"
+                    onPress={() => handleMapMarker("Turku")}
+                />
+                <Marker
                     coordinate={{latitude: 62.6000, longitude: 29.7639}}
                     title={"Joensuu"}
                     description={"description"}
