@@ -95,10 +95,11 @@ export default StyleSheet.create({
     },
     textItem1:{
       margin: 5,
-      color: "blue"
-    },
-    stationContainer:{
-      border: 2
+      color: "black",
+      border: 2,
+      borderRadius: 3,
+      borderColor: "black",
+      borderWidth: 1
     },
     contentContainer1:{
       minWidth: '100%'
