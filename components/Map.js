@@ -8,7 +8,6 @@ export default function Map() {
     const { setShowMap } = useContext(MapOpen);
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setChosenCity } = useContext(City);
-    const [testi, setTesti] = useState("");
 
     const handleMapMarker = (cityName) => {
         Alert.alert(
@@ -28,7 +27,6 @@ export default function Map() {
     };
 
     const OpenCities = (cityName) => {
-        setTesti(cityName);
         setShowMap(false);
         setChosenCity(cityName);
         setShowCameraStations(true);
