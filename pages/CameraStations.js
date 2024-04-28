@@ -95,7 +95,7 @@ export default function CameraStations() {
                     contentContainerStyle={styles.contentContainer1}
                 />
             </View>
-            <Pressable onPress={back}><Text>Back to cities</Text></Pressable>
+            <Pressable onPress={back} style={styles.buttonColor}><Text>Back to cities</Text></Pressable>
             <View style={styles.container}>
                 {showPic && (
                     <>
