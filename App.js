@@ -3,7 +3,6 @@ import { StatusBar, StyleSheet, Text, View, Dimensions, Button, DrawerLayoutAndr
 import { CancelContext, } from './components/Contexts';
 import { Icon } from 'react-native-paper';
 import Map from './components/Map';
-import Weathercams from './pages/Weathercams';
 import Customize from './pages/Customize';
 import Cities from './pages/Cities';
 import Weather from './pages/Weather';
@@ -14,7 +13,6 @@ import { Citiesopen, CameraStationsOpen, City, MapOpen } from './components/Cont
 
 export default function App() {
   const drawerRef = useRef(null);
-  const [showWeathercams, setShowWeathercams] = useState(false);
   const [showCustomize, setShowCustomize] = useState(false);
   const [showForecast, setShowForecast] = useState(false);
   const [showWeather, setShowWeather] = useState(false);
@@ -32,19 +30,10 @@ export default function App() {
     drawerRef.current.closeDrawer();
   };
 
-  const openWeathercams = () => {
-    setShowWeathercams(true);
-    setShowCustomize(false);
-    setShowForecast(false);
-    setShowWeather(false);
-    setShowMap(false);
-    setShowCameraStations(false);
-    drawerRef.current.closeDrawer();
-  };
+ 
 
   const openCustomize = () => {
     setShowCustomize(true);
-    setShowWeathercams(false);
     setShowForecast(false);
     setShowWeather(false);
     setShowMap(false);
@@ -54,7 +43,6 @@ export default function App() {
 
   const openForecast = () => {
     setShowForecast(true);
-    setShowWeathercams(false);
     setShowCustomize(false);
     setShowWeather(false);
     setShowMap(false);
@@ -64,7 +52,6 @@ export default function App() {
 
   const openWeather = () => {
     setShowWeather(true);
-    setShowWeathercams(false);
     setShowCustomize(false);
     setShowForecast(false);
     setShowMap(false);
@@ -74,7 +61,6 @@ export default function App() {
 
   const close = () => {
     setShowCustomize(false);
-    setShowWeathercams(false);
     setShowForecast(false);
     setShowWeather(false);
     setShowCameraStations(false);
@@ -108,9 +94,7 @@ export default function App() {
                 <StatusBar backgroundColor="#fff" barStyle="dark-content" />
                 {showMap ? (
                   <Map style={styles.map} />
-                ) : showWeathercams ? (
-                  <Weathercams />
-                ) : showForecast ? (
+                )  : showForecast ? (
                   <Cities />
                 ) : showWeather ? (
                   <Weather />
@@ -121,7 +105,7 @@ export default function App() {
                 ) : null}
 
                 <View style={styles.searchContainer}>
-                  {!showWeathercams && !showCustomize && !showForecast && !showWeather && !showCameraStations ? (
+                  {!showCustomize && !showForecast && !showWeather && !showCameraStations ? (
                     <>
                       <Button style={styles.button} title="☰" onPress={openDrawer} />
                       <TextInput
