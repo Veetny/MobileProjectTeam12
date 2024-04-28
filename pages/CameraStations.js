@@ -15,7 +15,7 @@ export default function CameraStations() {
     const { chosenCity } = useContext(City);
 
     const [showPic, setShowPic] = useState(false);
-    const [wcam, setWcam] = useState("man.png");
+    const [wcam, setWcam] = useState("./man.png");
     const [refresh, setRefresh] = useState(false); // State to trigger image refresh
 
     const back = () => {
