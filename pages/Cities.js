@@ -197,7 +197,7 @@ export default function Forecast() {
                 {"\n"}
                 <Pressable onPress={toEnontekiö}><Text>Enontekiö</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toSodankylä}><Text>Enontekiö</Text></Pressable>
+                <Pressable onPress={toSodankylä}><Text>Sodankylä</Text></Pressable>
                 {"\n"}
                 <Pressable onPress={toKalajoki}><Text>Kalajoki</Text></Pressable>
                 {"\n"}
