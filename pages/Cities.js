@@ -137,6 +137,16 @@ export default function Forecast() {
         setShowCameraStations(true);
         setShowForecast(false);
     };
+    const toKalajoki = () => {
+        setChosenCity("Kalajoki");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
+    const toKajaani = () => {
+        setChosenCity("Kajaani");
+        setShowCameraStations(true);
+        setShowForecast(false);
+    };
 
     return (
         <View style={styles.ForecastContainer}>
@@ -188,6 +198,10 @@ export default function Forecast() {
                 <Pressable onPress={toEnontekiö}><Text>Enontekiö</Text></Pressable>
                 {"\n"}
                 <Pressable onPress={toSodankylä}><Text>Enontekiö</Text></Pressable>
+                {"\n"}
+                <Pressable onPress={toKalajoki}><Text>Kalajoki</Text></Pressable>
+                {"\n"}
+                <Pressable onPress={toKajaani}><Text>Kajaani</Text></Pressable>
                 </Text>
         </View>
 
