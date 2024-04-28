@@ -1,48 +1,37 @@
-import React, { useContext } from "react";
-import { StyleSheet, View, Dimensions, Platform, StatusBar, Alert, Image, TouchableOpacity, Text } from "react-native";
+import React, { useContext, useState } from "react";
+import { StyleSheet, View, Alert } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
-import Constants from 'expo-constants';
 import styles from "../styles/style";
-import { MapOpen, Citiesopen } from "./Contexts";
+import { MapOpen, Citiesopen, CameraStationsOpen, City } from "./Contexts";
 
 export default function Map() {
     const { setShowMap } = useContext(MapOpen);
-    const { setShowForecast } = useContext(Citiesopen);
-    const images = "https://weathercam.digitraffic.fi/C1259501.jpg"
-    const handleMapMarkerMaik = () => {
-        Alert.alert(
-            "Oulu",
-            "tigermafia",
-            [
-                {
-                    text: "Open Cities",
-                    onPress: OpenCities
-                },
-                {
-                    text: "Close",
-                    onPress: () => console.log("skibidi")
-                }
-            ]
-        );
-    };
+    const { setShowCameraStations } = useContext(CameraStationsOpen);
+    const { setChosenCity } = useContext(City);
+    const [testi, setTesti] = useState("");
 
-    const OpenCities = () => {
-        setShowMap(false);
-        setShowForecast(true);
-    };
-
-    const handleMapMarker = () => {
+    const handleMapMarker = (cityName) => {
         Alert.alert(
-            "Tampere",
+            cityName,
             "This is an alert message with a button",
             [
                 {
-                    
-                    text: "OK",
-                    onPress: () => console.log("OK Pressed")
+                    text: "Open Stations",
+                    onPress: () => OpenCities(cityName)
+                },
+                {
+                    text: "Close",
+                    onPress: () => console.log("Closed")
                 }
             ]
         );
+    };
+
+    const OpenCities = (cityName) => {
+        setTesti(cityName);
+        setShowMap(false);
+        setChosenCity(cityName);
+        setShowCameraStations(true);
     };
 
     return (
@@ -58,16 +47,12 @@ export default function Map() {
                 <Marker
                     coordinate={{latitude: 61.462733, longitude: 23.769505}}
                     title={"Tampere"}
-                    description={"description"}
-                    pinColor="blue"
-                    onPress={handleMapMarker}
+                    onPress={() => handleMapMarker("Tampere")}
                 />
                 <Marker
                     coordinate={{latitude: 65.0142, longitude: 25.4719}}
-                    title={"Oulun pylly"}
-                    description={"description"}
-                    pinColor="green"
-                    onPress={handleMapMarkerMaik}
+                    title={"Oulu"}
+                    onPress={() => handleMapMarker("Oulu")}
                 />
                 <Marker
                     coordinate={{latitude: 60.1756, longitude: 24.9342}}
