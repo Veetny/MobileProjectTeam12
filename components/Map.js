@@ -12,10 +12,10 @@ export default function Map() {
     const handleMapMarker = (cityName) => {
         Alert.alert(
             cityName,
-            "This is an alert message with a button",
+            "This is a place located in Finland",
             [
                 {
-                    text: "Open Stations",
+                    text: "Open selected place",
                     onPress: () => OpenCities(cityName)
                 },
                 {
