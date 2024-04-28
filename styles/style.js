@@ -54,6 +54,9 @@ export default StyleSheet.create({
       borderRadius: 10,
       margin: 5,
     },
+    center: {
+      textAlign: "center"
+    },
     buttonText: {
       fontSize: 20,
       padding: 10,
@@ -99,7 +102,9 @@ export default StyleSheet.create({
       border: 2,
       borderRadius: 3,
       borderColor: "black",
-      borderWidth: 1
+      borderWidth: 1,
+      backgroundColor: "#6C92F3",
+      padding: 3
     },
     contentContainer1:{
       minWidth: '100%'

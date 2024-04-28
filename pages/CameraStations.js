@@ -82,7 +82,7 @@ export default function CameraStations() {
 
     return (
         <View style={styles.KymmeniaPaddingeja}>
-            <Pressable onPress={back} style={styles.buttonColor}><Text>Back to cities</Text></Pressable>
+            <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
             <View>
                 <FlatList
                     data={stationNames}
