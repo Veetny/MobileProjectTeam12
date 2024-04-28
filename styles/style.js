@@ -103,7 +103,7 @@ export default StyleSheet.create({
       borderRadius: 3,
       borderColor: "black",
       borderWidth: 1,
-      backgroundColor: "#6C92F3",
+      backgroundColor: "lightblue",
       padding: 3
     },
     contentContainer1:{
