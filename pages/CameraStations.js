@@ -194,7 +194,6 @@ export default function CameraStations() {
                         />
                     </View>
 
-                    {/* Other JSX */}
                     {showWeather && (
                         <>
                             <Text>Weather of chosen road:</Text>
