@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, FlatList, Pressable, Image, Button } from "react-native";
+import { View, Text, FlatList, Pressable, Image, Button, ActivityIndicator } from "react-native";
 import styles from "../styles/style";
 import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
 
@@ -16,7 +16,9 @@ export default function CameraStations() {
 
     const [showPic, setShowPic] = useState(false);
     const [wcam, setWcam] = useState("./man.png");
-    const [refresh, setRefresh] = useState(false); // State to trigger image refresh
+    const [refresh, setRefresh] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(true);
 
     const back = () => {
         setShowCameraStations(false);
@@ -68,7 +70,8 @@ export default function CameraStations() {
                 }
             }
             setStationNames(names);
-            setStationIds(ids); // Set station ids state
+            setStationIds(ids);
+            setIsLoading(false);
         };
 
         if (ouluCameraIds.length > 0) {
@@ -83,20 +86,30 @@ export default function CameraStations() {
     return (
         <View style={styles.KymmeniaPaddingeja}>
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
-            <View>
-                <FlatList
-                    data={stationNames}
-                    renderItem={({ item, index }) => (
-                        <Pressable onPress={() => handleStationPress(item, stationIds[index])}>
-                            <Text style={styles.textItem1}>{item}</Text>
-                        </Pressable>
-                    )}
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal={true}
-                    contentContainerStyle={styles.contentContainer1}
-                />
-            </View>
-            
+            {isLoading ? (
+                <>
+                    <Text>Loading roads of {chosenCity}...</Text>
+                    <View style={styles.container}><ActivityIndicator size="large" /></View>
+                </>
+            ) :
+                <>
+                    <View>
+                        <FlatList
+                            data={stationNames}
+                            renderItem={({ item, index }) => (
+                                <Pressable onPress={() => handleStationPress(item, stationIds[index])}>
+                                    <Text style={styles.textItem1}>{item}</Text>
+                                </Pressable>
+                            )}
+                            keyExtractor={(item, index) => index.toString()}
+                            horizontal={true}
+                            contentContainerStyle={styles.contentContainer1}
+                        />
+                    </View>
+                </>
+            }
+
+
             <View style={styles.container}>
                 {showPic && (
                     <>
@@ -110,7 +123,7 @@ export default function CameraStations() {
                     </>
                 )}
             </View>
-            
+
         </View>
     );
 }
