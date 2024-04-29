@@ -99,11 +99,6 @@ export default StyleSheet.create({
     textItem1:{
       margin: 5,
       color: "black",
-      border: 2,
-      borderRadius: 3,
-      borderColor: "black",
-      borderWidth: 1,
-      backgroundColor: "lightblue",
       padding: 3
     },
     contentContainer1:{
@@ -137,5 +132,13 @@ export default StyleSheet.create({
   },
   image: {
     height: 200
+  },
+  border1:{
+    backgroundColor: "lightblue",
+    border: 2,
+    borderRadius: 3,
+    borderColor: "black",
+    borderWidth: 1,
+    margin: 1,
   },
   });

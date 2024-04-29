@@ -8,7 +8,24 @@ export default function CameraStations() {
     const [ouluCameraIds, setOuluCameraIds] = useState([]);
     const [stationNames, setStationNames] = useState([]);
     const [stationIds, setStationIds] = useState([]);
-    const URL = "https://tie.digitraffic.fi/api/weathercam/v1/stations";
+
+    const [weatherIds, setWeatherIds] = useState([]);
+    const [weatherNames, setWeatherNames] = useState([]);
+    const [showWeather, setShowWeather] = useState(false);
+    const [desiredSensorValues, setDesiredSensorValues] = useState([]);
+
+    const sensorInfo = {
+        "ILMA": { title: "Temperature (air)", unit: "°C" },
+        "TIE_1": { title: "Temperature (road)", unit: "°C" },
+        "NÄKYVYYS_KM": { title: "Visibility in km", unit: "km" },
+        "SADE": { title: "Is it raining?" },
+        "KELI_1": { title: "Road quality" },
+        "ILMAN_LÄMPÖTILA_24H_MIN": { title: "Lowest temperature in last 24H", unit: "°C" }
+    };
+
+
+    const URL1 = "https://tie.digitraffic.fi/api/weathercam/v1/stations";
+    const URL3 = "https://tie.digitraffic.fi/api/weather/v1/stations";
 
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setShowForecast } = useContext(Citiesopen);
@@ -26,10 +43,10 @@ export default function CameraStations() {
     };
 
     const handleStationPress = (stationName, stationId) => {
-        console.log(`Pressed ${stationName} with ID ${stationId}`); // Log both station name and id
-        const URL1 = "https://tie.digitraffic.fi/api/weathercam/v1/stations/" + stationId;
+        console.log(`Pressed ${stationName} with ID ${stationId}`);
+        const URL2 = "https://tie.digitraffic.fi/api/weathercam/v1/stations/" + stationId;
         setShowPic(true);
-        fetch(URL1)
+        fetch(URL2)
             .then(response => response.json())
             .then((json) => {
                 console.log(json.properties.presets[0].imageUrl);
@@ -37,12 +54,12 @@ export default function CameraStations() {
             })
             .catch((error) => {
                 console.error('Error retrieving image:', error);
-                setWcam(""); // Reset image URL in case of error
+                setWcam("");
             });
     };
 
     useEffect(() => {
-        fetch(URL)
+        fetch(URL1)
             .then(response => response.json())
             .then(data => {
                 setWeatherCameras(data.features);
@@ -56,15 +73,15 @@ export default function CameraStations() {
     useEffect(() => {
         const fetchStationNames = async () => {
             const names = [];
-            const ids = []; // Initialize array for station ids
+            const ids = [];
             for (let i = 0; i < ouluCameraIds.length; i++) {
                 const id = ouluCameraIds[i];
                 try {
-                    const response = await fetch(`${URL}/${id}`);
+                    const response = await fetch(`${URL1}/${id}`);
                     const json = await response.json();
                     const processedNames = json.properties.names.en;
                     names.push(processedNames);
-                    ids.push(id); // Push id into array
+                    ids.push(id);
                 } catch (error) {
                     console.error('Error fetching station details:', error);
                 }
@@ -79,8 +96,75 @@ export default function CameraStations() {
         }
     }, [ouluCameraIds]);
 
+
+    useEffect(() => {
+        fetch(URL3)
+            .then(response => response.json())
+            .then(data => {
+                setWeatherCameras(data.features);
+                const stations = data.features.filter(station => station.properties.name.includes(chosenCity));
+                const stationIds = stations.map(station => station.id);
+                setWeatherIds(stationIds);
+            })
+            .catch(error => console.error('Error fetching weather stations:', error));
+    }, []);
+
+    useEffect(() => {
+        const fetchStationNames1 = async () => {
+            const names = [];
+            for (let i = 0; i < weatherIds.length; i++) {
+                const id = weatherIds[i];
+                try {
+                    const response = await fetch(`${URL3}/${id}`);
+                    const json = await response.json();
+                    const processedNames = json.properties.names.en;
+                    names.push(processedNames);
+                } catch (error) {
+                    console.error('Error fetching weather names:', error);
+                }
+            }
+            setWeatherNames(names);
+        }
+        if (ouluCameraIds.length > 0) {
+            fetchStationNames1();
+        }
+    }, [ouluCameraIds]);
+
+    useEffect(() => {
+        console.log("Station Names:", weatherNames);
+    }, [weatherNames]);
+
+    useEffect(() => {
+        console.log(weatherIds);
+    }, [weatherIds]);
+
+    useEffect(() => {
+        console.log(desiredSensorValues);
+    }, [desiredSensorValues]);
+
+    const handleWeatherPress = async (weatherName, index) => {
+        console.log(`Pressed weather station ${weatherName} with index ${index}`);
+        const URL2 = "https://tie.digitraffic.fi/api/weather/v1/stations/data";
+        const weatherId = weatherIds[index];
+        setShowWeather(true);
+        fetch(URL2)
+            .then(response => response.json())
+            .then((json) => {
+                // Find the station with the matching id
+                const stationData = json.stations.find(station => station.id === weatherId);
+                // Perform further actions with the stationData
+                const desiredSensorNames = ["ILMA", "TIE_1", "SADE", "NÄKYVYYS_KM", "KELI_1", "ILMAN_LÄMPÖTILA_24H_MIN"];
+                const desiredSensorValues = stationData.sensorValues.filter(sensor => desiredSensorNames.includes(sensor.name));
+                setDesiredSensorValues(desiredSensorValues);
+            })
+            .catch((error) => {
+                console.error('Error retrieving weather data:', error);
+            });
+    };
+
+
     const handleRefresh = () => {
-        setRefresh(prevState => !prevState); // Toggle refresh state to trigger image reload
+        setRefresh(prevState => !prevState);
     };
 
     return (
@@ -94,10 +178,41 @@ export default function CameraStations() {
             ) :
                 <>
                     <View>
+                        <Text>Choose a road to see weather from:</Text>
+                        <FlatList
+                            data={weatherNames}
+                            renderItem={({ item, index }) => (
+                                <Pressable onPress={() => handleWeatherPress(item, index)} style={styles.border1}>
+                                    <Text style={styles.textItem1}>{item}</Text>
+                                </Pressable>
+                            )}
+                            keyExtractor={(item, index) => index.toString()}
+                            horizontal={true}
+                            contentContainerStyle={styles.contentContainer1}
+                        />
+                    </View>
+
+                    {/* Other JSX */}
+                    {showWeather && (
+                        <>
+                            <Text>Weather of chosen road:</Text>
+                            {desiredSensorValues.map(sensor => (
+                                <View key={sensor.id} style={styles.weatherDataItem}>
+                                    <Text style={styles.weatherDataName}>{sensorInfo[sensor.name].title}</Text>
+                                    {sensorInfo[sensor.name].unit && <Text style={styles.weatherDataValue}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
+                                    {!sensorInfo[sensor.name].unit && <Text style={styles.weatherDataValue}>{sensor.sensorValueDescriptionEn}</Text>}
+                                    {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C, drive cautiously!</Text>}
+                                </View>
+                            ))}
+                        </>
+                    )}
+
+                    <View>
+                        <Text>Choose a road to see camera from:</Text>
                         <FlatList
                             data={stationNames}
                             renderItem={({ item, index }) => (
-                                <Pressable onPress={() => handleStationPress(item, stationIds[index])}>
+                                <Pressable onPress={() => handleStationPress(item, stationIds[index])} style={styles.border1}>
                                     <Text style={styles.textItem1}>{item}</Text>
                                 </Pressable>
                             )}
@@ -108,6 +223,7 @@ export default function CameraStations() {
                     </View>
                 </>
             }
+
 
 
             <View style={styles.container}>
