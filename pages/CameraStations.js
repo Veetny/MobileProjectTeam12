@@ -202,7 +202,8 @@ export default function CameraStations() {
                                     <Text style={styles.weatherDataName}>{sensorInfo[sensor.name].title}</Text>
                                     {sensorInfo[sensor.name].unit && <Text style={styles.weatherDataValue}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
                                     {!sensorInfo[sensor.name].unit && <Text style={styles.weatherDataValue}>{sensor.sensorValueDescriptionEn}</Text>}
-                                    {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C, drive cautiously!</Text>}
+                                    {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C and can be slippery, drive cautiously!</Text>}
+                                    {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && <Text style={styles.additionalText}>Visibility is below 1 km, drive cautiously!</Text>}
                                 </View>
                             ))}
                         </>
