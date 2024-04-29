@@ -104,7 +104,9 @@ export default function CameraStations() {
                 setWeatherCameras(data.features);
                 const stations = data.features.filter(station => station.properties.name.includes(chosenCity));
                 const stationIds = stations.map(station => station.id);
+                const stationNames = stations.map(station => station.properties.name);
                 setWeatherIds(stationIds);
+                setWeatherNames(stationNames);
             })
             .catch(error => console.error('Error fetching weather stations:', error));
     }, []);
@@ -125,13 +127,13 @@ export default function CameraStations() {
             }
             setWeatherNames(names);
         }
-        if (ouluCameraIds.length > 0) {
+        if (weatherIds.length > 0) {
             fetchStationNames1();
         }
-    }, [ouluCameraIds]);
+    }, [weatherIds]);
 
     useEffect(() => {
-        console.log("Station Names:", weatherNames);
+        console.log("Weather Names:", weatherNames);
     }, [weatherNames]);
 
     useEffect(() => {
@@ -172,7 +174,7 @@ export default function CameraStations() {
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
             {isLoading ? (
                 <>
-                    <Text>Loading roads of {chosenCity}...</Text>
+                    <Text>Loading cameras of {chosenCity}...</Text>
                     <View style={styles.container}><ActivityIndicator size="large" /></View>
                 </>
             ) :
