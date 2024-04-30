@@ -4,14 +4,11 @@ import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
 import styles from "../styles/style";
 
 export default function Forecast() {
-    const [searchQuery, setSearchQuery] = useState('');
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setShowForecast } = useContext(Citiesopen);
     const { setChosenCity } = useContext(City);
 
-    const handleSearch = (text) => {
-        setSearchQuery(text);
-    };
+  
 
     const navigateToCity = (cityName) => {
         setChosenCity(cityName);
