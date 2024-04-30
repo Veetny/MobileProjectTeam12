@@ -151,57 +151,57 @@ export default function Forecast() {
     return (
         <View style={styles.ForecastContainer}>
                 <Text style={styles.listText}>
-                <Pressable onPress={toHelsinki}><Text>Helsinki</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toHelsinki}><Text>Helsinki</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toEspoo}><Text>Espoo</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toEspoo}><Text>Espoo</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toTampere}><Text>Tampere</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toTampere}><Text>Tampere</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toVantaa}><Text>Vantaa</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toVantaa}><Text>Vantaa</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toOulu}><Text>Oulu</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toOulu}><Text>Oulu</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toTurku}><Text>Turku</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toTurku}><Text>Turku</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toJyväskylä}><Text>Jyväskylä</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toJyväskylä}><Text>Jyväskylä</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toLahti}><Text>Lahti</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toLahti}><Text>Lahti</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toKuopio}><Text>Kuopio</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toKuopio}><Text>Kuopio</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toPori}><Text>Pori</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toPori}><Text>Pori</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toKouvola}><Text>Kouvola</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toKouvola}><Text>Kouvola</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toJoensuu}><Text>Joensuu</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toJoensuu}><Text>Joensuu</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toLappeenranta}><Text>Lappeenranta</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toLappeenranta}><Text>Lappeenranta</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toHämeenlinna}><Text>Hämeenlinna</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toHämeenlinna}><Text>Hämeenlinna</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toVaasa}><Text>Vaasa</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toVaasa}><Text>Vaasa</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toSeinäjoki}><Text>Seinäjoki</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toSeinäjoki}><Text>Seinäjoki</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toRovaniemi}><Text>Rovaniemi</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toRovaniemi}><Text>Rovaniemi</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toMikkeli}><Text>Mikkeli</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toMikkeli}><Text>Mikkeli</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toKotka}><Text>Kotka</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toKotka}><Text>Kotka</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toSalo}><Text>Tommi Salo</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toSalo}><Text>Tommi Salo</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toKuusamo}><Text>Kuusamo</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toKuusamo}><Text>Kuusamo</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toInari}><Text>Inari</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toInari}><Text>Inari</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toEnontekiö}><Text>Enontekiö</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toEnontekiö}><Text>Enontekiö</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toSodankylä}><Text>Sodankylä</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toSodankylä}><Text>Sodankylä</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toKalajoki}><Text>Kalajoki</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toKalajoki}><Text>Kalajoki</Text></Pressable>
                 {"\n"}
-                <Pressable onPress={toKajaani}><Text>Kajaani</Text></Pressable>
+                <Pressable style={styles.border1} onPress={toKajaani}><Text>Kajaani</Text></Pressable>
                 </Text>
         </View>
 
