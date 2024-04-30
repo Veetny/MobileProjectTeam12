@@ -1,15 +1,10 @@
 import { useContext, useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from "react-native";
-import { Icon } from 'react-native-paper';
+import { View, Text, Pressable, ScrollView } from "react-native";
+import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
 import styles from "../styles/style";
 
-import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
-
-
-
 export default function Forecast() {
-    const [searchQuery, setSearchQuery] = ('');
-
+    const [searchQuery, setSearchQuery] = useState('');
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setShowForecast } = useContext(Citiesopen);
     const { setChosenCity } = useContext(City);
@@ -17,195 +12,29 @@ export default function Forecast() {
     const handleSearch = (text) => {
         setSearchQuery(text);
     };
-    const toHelsinki = () => {
-        setChosenCity("Helsinki");
+
+    const navigateToCity = (cityName) => {
+        setChosenCity(cityName);
         setShowCameraStations(true);
         setShowForecast(false);
     };
-    const toEspoo = () => {
-        setChosenCity("Espoo");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toTampere = () => {
-        setChosenCity("Tampere");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toVantaa = () => {
-        setChosenCity("Vantaa");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toOulu = () => {
-        setChosenCity("Oulu");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toTurku = () => {
-        setChosenCity("Turku");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toJyväskylä = () => {
-        setChosenCity("Jyväskylä");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toLahti = () => {
-        setChosenCity("Lahti");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toKuopio = () => {
-        setChosenCity("Kuopio");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toPori = () => {
-        setChosenCity("Pori");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toKouvola = () => {
-        setChosenCity("Kouvola");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toJoensuu = () => {
-        setChosenCity("Joensuu");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toLappeenranta = () => {
-        setChosenCity("Lappeenranta");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toHämeenlinna = () => {
-        setChosenCity("Hämeenlinna");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toVaasa = () => {
-        setChosenCity("Vaasa");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toSeinäjoki = () => {
-        setChosenCity("Seinäjoki");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toRovaniemi = () => {
-        setChosenCity("Rovaniemi");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toMikkeli = () => {
-        setChosenCity("Mikkeli");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toKotka = () => {
-        setChosenCity("Kotka");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toSalo = () => {
-        setChosenCity("Salo");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toKuusamo = () => {
-        setChosenCity("Kuusamo");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toInari = () => {
-        setChosenCity("Inari");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toEnontekiö = () => {
-        setChosenCity("Enontekiö");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toSodankylä = () => {
-        setChosenCity("Sodankylä");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toKalajoki = () => {
-        setChosenCity("Kalajoki");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
-    const toKajaani = () => {
-        setChosenCity("Kajaani");
-        setShowCameraStations(true);
-        setShowForecast(false);
-    };
+
+    const cities = [
+        "Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu", "Turku", "Jyväskylä", "Lahti",
+        "Kuopio", "Pori", "Kouvola", "Joensuu", "Lappeenranta", "Hämeenlinna", "Vaasa",
+        "Seinäjoki", "Rovaniemi", "Mikkeli", "Kotka", "Salo", "Kuusamo", "Inari",
+        "Enontekiö", "Sodankylä", "Kalajoki", "Kajaani"
+    ];
 
     return (
         <View style={styles.ForecastContainer}>
             <ScrollView>
-                <Text style={styles.listText}>
-                <Pressable style={styles.border1} onPress={toHelsinki}><Text>Helsinki</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toEspoo}><Text>Espoo</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toTampere}><Text>Tampere</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toVantaa}><Text>Vantaa</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toOulu}><Text>Oulu</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toTurku}><Text>Turku</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toJyväskylä}><Text>Jyväskylä</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toLahti}><Text>Lahti</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toKuopio}><Text>Kuopio</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toPori}><Text>Pori</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toKouvola}><Text>Kouvola</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toJoensuu}><Text>Joensuu</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toLappeenranta}><Text>Lappeenranta</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toHämeenlinna}><Text>Hämeenlinna</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toVaasa}><Text>Vaasa</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toSeinäjoki}><Text>Seinäjoki</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toRovaniemi}><Text>Rovaniemi</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toMikkeli}><Text>Mikkeli</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toKotka}><Text>Kotka</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toSalo}><Text>Tommi Salo</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toKuusamo}><Text>Kuusamo</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toInari}><Text>Inari</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toEnontekiö}><Text>Enontekiö</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toSodankylä}><Text>Sodankylä</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toKalajoki}><Text>Kalajoki</Text></Pressable>
-                {"\n"}
-                <Pressable style={styles.border1} onPress={toKajaani}><Text>Kajaani</Text></Pressable>
-                </Text>
-                </ScrollView>
+                {cities.map(city => (
+                    <Pressable key={city} style={styles.border1} onPress={() => navigateToCity(city)}>
+                        <Text>{city}</Text>
+                    </Pressable>
+                ))}
+            </ScrollView>
         </View>
-
     );
 }
