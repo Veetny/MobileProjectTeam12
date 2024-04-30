@@ -192,11 +192,6 @@ export default function CameraStations() {
     return (
         <View style={styles.KymmeniaPaddingeja}>
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
-            <View style={styles.viewi}>
-                <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>Cameras</Text></Pressable>
-                <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>Weather</Text></Pressable>
-                <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>Forecast</Text></Pressable>
-            </View>
             {isLoading ? (
                 <>
                     <Text>Loading stations of {chosenCity}...</Text>
@@ -204,6 +199,11 @@ export default function CameraStations() {
                 </>
             ) :
                 <>
+                <View style={styles.viewi}>
+                <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>Cameras</Text></Pressable>
+                <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>Weather</Text></Pressable>
+                <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>Forecast</Text></Pressable>
+                </View>
                     {chooseWeather ? (
                         <>
                             <View>
