@@ -108,11 +108,6 @@ export default function App() {
                   {!showCustomize && !showForecast && !showWeather && !showCameraStations ? (
                     <>
                       <Button style={styles.button} title="☰" onPress={openDrawer} />
-                      <TextInput
-                        style={styles.searchBar}
-                        placeholder={'Search'}
-                        placeholderTextColor={'#666'}
-                      />
                     </>
                   ) : (
                     <>

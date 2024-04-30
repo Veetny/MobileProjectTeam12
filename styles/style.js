@@ -141,4 +141,15 @@ export default StyleSheet.create({
     borderWidth: 1,
     margin: 1,
   },
+  stationText: {
+    padding: 5
+  },
+  stationText2: {
+    paddingLeft: 5
+  },
+  additionalText: {
+    color: "red",
+    fontWeight: "bold",
+    paddingLeft: 5
+  }
   });

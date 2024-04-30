@@ -174,13 +174,13 @@ export default function CameraStations() {
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
             {isLoading ? (
                 <>
-                    <Text>Loading cameras of {chosenCity}...</Text>
+                    <Text>Loading stations of {chosenCity}...</Text>
                     <View style={styles.container}><ActivityIndicator size="large" /></View>
                 </>
             ) :
                 <>
                     <View>
-                        <Text>Choose a road to see weather from:</Text>
+                        <Text style={styles.stationText}>Choose a road to see weather from:</Text>
                         <FlatList
                             data={weatherNames}
                             renderItem={({ item, index }) => (
@@ -196,12 +196,12 @@ export default function CameraStations() {
 
                     {showWeather && (
                         <>
-                            <Text>Weather of chosen road:</Text>
+                            <Text style={styles.stationText}>Weather of chosen road:</Text>
                             {desiredSensorValues.map(sensor => (
                                 <View key={sensor.id} style={styles.weatherDataItem}>
-                                    <Text style={styles.weatherDataName}>{sensorInfo[sensor.name].title}</Text>
-                                    {sensorInfo[sensor.name].unit && <Text style={styles.weatherDataValue}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
-                                    {!sensorInfo[sensor.name].unit && <Text style={styles.weatherDataValue}>{sensor.sensorValueDescriptionEn}</Text>}
+                                    <Text style={styles.stationText2}>{sensorInfo[sensor.name].title}</Text>
+                                    {sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
+                                    {!sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.sensorValueDescriptionEn}</Text>}
                                     {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C and can be slippery, drive cautiously!</Text>}
                                     {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && <Text style={styles.additionalText}>Visibility is below 1 km, drive cautiously!</Text>}
                                 </View>
@@ -210,7 +210,7 @@ export default function CameraStations() {
                     )}
 
                     <View>
-                        <Text>Choose a road to see camera from:</Text>
+                        <Text style={styles.stationText}>Choose a road to see camera from:</Text>
                         <FlatList
                             data={stationNames}
                             renderItem={({ item, index }) => (
