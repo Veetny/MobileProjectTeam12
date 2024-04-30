@@ -151,5 +151,8 @@ export default StyleSheet.create({
     color: "red",
     fontWeight: "bold",
     paddingLeft: 5
-  }
+  },
+  viewi:{
+    flexDirection: 'row',
+  },
   });

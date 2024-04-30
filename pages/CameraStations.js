@@ -35,6 +35,10 @@ export default function CameraStations() {
     const [wcam, setWcam] = useState("./man.png");
     const [refresh, setRefresh] = useState(false);
 
+    const [chooseCam, setChooseCam] = useState(false);
+    const [chooseWeather, setChooseWeather] = useState(false);
+    const [chooseForecast, setChooseForecast] = useState(false);
+
     const [isLoading, setIsLoading] = useState(true);
 
     const back = () => {
@@ -152,9 +156,7 @@ export default function CameraStations() {
         fetch(URL2)
             .then(response => response.json())
             .then((json) => {
-                // Find the station with the matching id
                 const stationData = json.stations.find(station => station.id === weatherId);
-                // Perform further actions with the stationData
                 const desiredSensorNames = ["ILMA", "TIE_1", "SADE", "NÄKYVYYS_KM", "KELI_1", "ILMAN_LÄMPÖTILA_24H_MIN"];
                 const desiredSensorValues = stationData.sensorValues.filter(sensor => desiredSensorNames.includes(sensor.name));
                 setDesiredSensorValues(desiredSensorValues);
@@ -169,9 +171,32 @@ export default function CameraStations() {
         setRefresh(prevState => !prevState);
     };
 
+    const weatherChosen = () => {
+        setChooseCam(false);
+        setChooseForecast(false);
+        setChooseWeather(true);
+    };
+
+    const camerasChosen = () => {
+        setChooseCam(true);
+        setChooseForecast(false);
+        setChooseWeather(false);
+    };
+
+    const forecastChosen = () => {
+        setChooseCam(false);
+        setChooseForecast(true);
+        setChooseWeather(false);
+    };
+
     return (
         <View style={styles.KymmeniaPaddingeja}>
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
+            <View style={styles.viewi}>
+                <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>Cameras</Text></Pressable>
+                <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>Weather</Text></Pressable>
+                <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>Forecast</Text></Pressable>
+            </View>
             {isLoading ? (
                 <>
                     <Text>Loading stations of {chosenCity}...</Text>
@@ -179,69 +204,78 @@ export default function CameraStations() {
                 </>
             ) :
                 <>
-                    <View>
-                        <Text style={styles.stationText}>Choose a road to see weather from:</Text>
-                        <FlatList
-                            data={weatherNames}
-                            renderItem={({ item, index }) => (
-                                <Pressable onPress={() => handleWeatherPress(item, index)} style={styles.border1}>
-                                    <Text style={styles.textItem1}>{item}</Text>
-                                </Pressable>
-                            )}
-                            keyExtractor={(item, index) => index.toString()}
-                            horizontal={true}
-                            contentContainerStyle={styles.contentContainer1}
-                        />
-                    </View>
-
-                    {showWeather && (
+                    {chooseWeather ? (
                         <>
-                            <Text style={styles.stationText}>Weather of chosen road:</Text>
-                            {desiredSensorValues.map(sensor => (
-                                <View key={sensor.id} style={styles.weatherDataItem}>
-                                    <Text style={styles.stationText2}>{sensorInfo[sensor.name].title}</Text>
-                                    {sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
-                                    {!sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.sensorValueDescriptionEn}</Text>}
-                                    {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C and can be slippery, drive cautiously!</Text>}
-                                    {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && <Text style={styles.additionalText}>Visibility is below 1 km, drive cautiously!</Text>}
-                                </View>
-                            ))}
-                        </>
-                    )}
+                            <View>
+                                <Text style={styles.stationText}>Choose a road to see weather from:</Text>
+                                <FlatList
+                                    data={weatherNames}
+                                    renderItem={({ item, index }) => (
+                                        <Pressable onPress={() => handleWeatherPress(item, index)} style={styles.border1}>
+                                            <Text style={styles.textItem1}>{item}</Text>
+                                        </Pressable>
+                                    )}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    horizontal={true}
+                                    contentContainerStyle={styles.contentContainer1}
+                                />
+                            </View>
 
-                    <View>
-                        <Text style={styles.stationText}>Choose a road to see camera from:</Text>
-                        <FlatList
-                            data={stationNames}
-                            renderItem={({ item, index }) => (
-                                <Pressable onPress={() => handleStationPress(item, stationIds[index])} style={styles.border1}>
-                                    <Text style={styles.textItem1}>{item}</Text>
-                                </Pressable>
+                            {showWeather && (
+                                <>
+                                    <Text style={styles.stationText}>Weather of chosen road:</Text>
+                                    {desiredSensorValues.map(sensor => (
+                                        <View key={sensor.id} style={styles.weatherDataItem}>
+                                            <Text style={styles.stationText2}>{sensorInfo[sensor.name].title}</Text>
+                                            {sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
+                                            {!sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.sensorValueDescriptionEn}</Text>}
+                                            {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C and can be slippery, drive cautiously!</Text>}
+                                            {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && <Text style={styles.additionalText}>Visibility is below 1 km, drive cautiously!</Text>}
+                                        </View>
+                                    ))}
+                                </>
                             )}
-                            keyExtractor={(item, index) => index.toString()}
-                            horizontal={true}
-                            contentContainerStyle={styles.contentContainer1}
-                        />
-                    </View>
+                        </>
+                    ) : chooseCam ? (
+                        <>
+                            <View>
+                                <Text style={styles.stationText}>Choose a road to see camera from:</Text>
+                                <FlatList
+                                    data={stationNames}
+                                    renderItem={({ item, index }) => (
+                                        <Pressable onPress={() => handleStationPress(item, stationIds[index])} style={styles.border1}>
+                                            <Text style={styles.textItem1}>{item}</Text>
+                                        </Pressable>
+                                    )}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    horizontal={true}
+                                    contentContainerStyle={styles.contentContainer1}
+                                />
+                            </View>
+                            <View style={styles.container}>
+                                {showPic && (
+                                    <>
+                                        <Text>Image of chosen road</Text>
+                                        <Image
+                                            source={{ uri: wcam }}
+                                            style={styles.image}
+                                            onError={(error) => console.log("Image loading error:", error)}
+                                        />
+                                        <Button title="Refresh" onPress={handleRefresh}></Button>
+                                    </>
+                                )}
+                            </View>
+                        </>
+                    ) : chooseForecast ? (
+                        <>
+                            <View>
+                                <Text>Forecast here:</Text>
+                            </View>
+                        </>
+                    ) : null}
+
                 </>
             }
-
-
-
-            <View style={styles.container}>
-                {showPic && (
-                    <>
-                        <Text>Image of chosen road</Text>
-                        <Image
-                            source={{ uri: wcam }}
-                            style={styles.image}
-                            onError={(error) => console.log("Image loading error:", error)}
-                        />
-                        <Button title="Refresh" onPress={handleRefresh}></Button>
-                    </>
-                )}
-            </View>
-
         </View>
     );
 }
