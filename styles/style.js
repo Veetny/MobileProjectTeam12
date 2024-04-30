@@ -22,7 +22,7 @@ export default StyleSheet.create({
       zIndex: 2,
     },
     button: {
-      marginRight: 10,
+
     },
     searchBar: {
       flex: 1,
