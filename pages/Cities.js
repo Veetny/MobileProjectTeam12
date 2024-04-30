@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable, ScrollView } from "react-native";
 import { Icon } from 'react-native-paper';
 import styles from "../styles/style";
 
@@ -150,6 +150,7 @@ export default function Forecast() {
 
     return (
         <View style={styles.ForecastContainer}>
+            <ScrollView>
                 <Text style={styles.listText}>
                 <Pressable style={styles.border1} onPress={toHelsinki}><Text>Helsinki</Text></Pressable>
                 {"\n"}
@@ -203,6 +204,7 @@ export default function Forecast() {
                 {"\n"}
                 <Pressable style={styles.border1} onPress={toKajaani}><Text>Kajaani</Text></Pressable>
                 </Text>
+                </ScrollView>
         </View>
 
     );
