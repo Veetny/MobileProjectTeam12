@@ -1,50 +1,29 @@
 import React, { useState, useContext } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { SelectedLanguage } from '../components/Contexts'
+import styles from '../styles/style';
 const App = () => {
   const {selectedLanguage, setSelectedLanguage} = useContext(SelectedLanguage);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.containerCust}>
       <TouchableOpacity
-        style={[styles.radioButton, selectedLanguage === 'en' && styles.selectedButton]}
+        style={[styles.radioButtonCust, selectedLanguage === 'en' && styles.selectedButtonCust]}
         onPress={() => setSelectedLanguage('en')}>
-        <Text style={styles.buttonText}>English</Text>
+        <Text style={styles.buttonTextCust}>English</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.radioButton, selectedLanguage === 'fi' && styles.selectedButton]}
+        style={[styles.radioButtonCust, selectedLanguage === 'fi' && styles.selectedButtonCust]}
         onPress={() => setSelectedLanguage('fi')}>
-        <Text style={styles.buttonText}>Finnish</Text>
+        <Text style={styles.buttonTextCust}>Finnish</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.radioButton, selectedLanguage === 'sv' && styles.selectedButton]}
+        style={[styles.radioButtonCust, selectedLanguage === 'sv' && styles.selectedButtonCust]}
         onPress={() => setSelectedLanguage('sv')}>
-        <Text style={styles.buttonText}>Swedish</Text>
+        <Text style={styles.buttonTextCust}>Swedish</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#45727C',
-  },
-  radioButton: {
-    backgroundColor: '#eee',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginVertical: 5,
-    borderRadius: 5,
-  },
-  selectedButton: {
-    backgroundColor: 'skyblue',
-  },
-  buttonText: {
-    fontSize: 16,
-  },
-});
 
 export default App;

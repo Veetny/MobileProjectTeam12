@@ -132,4 +132,23 @@ export default StyleSheet.create({
     fontSize: 20,
     margin: 6,
   },
+  containerCust: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#45727C',
+  },
+  radioButtonCust: {
+    backgroundColor: '#eee',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  selectedButtonCust: {
+    backgroundColor: 'skyblue',
+  },
+  buttonTextCust: {
+    fontSize: 16,
+  },
   });
