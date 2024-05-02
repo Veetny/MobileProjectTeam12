@@ -14,6 +14,12 @@ export default function CameraStations() {
     const [showWeather, setShowWeather] = useState(false);
     const [desiredSensorValues, setDesiredSensorValues] = useState([]);
 
+    const [forecastIds, setForecastIds] = useState([]);
+    const [forecastNames, setForecastNames] = useState([]);
+    const [showFor, setShowFor] = useState(false);
+    const [desiredForecastValues, setDesiredForecastValues] = useState([]);
+    const [selectedForecastId, setSelectedForecastId] = useState(0);
+
     const sensorInfo = {
         "ILMA": { title: "Temperature (air)", unit: "°C" },
         "TIE_1": { title: "Temperature (road)", unit: "°C" },
@@ -26,6 +32,7 @@ export default function CameraStations() {
 
     const URL1 = "https://tie.digitraffic.fi/api/weathercam/v1/stations";
     const URL3 = "https://tie.digitraffic.fi/api/weather/v1/stations";
+    const URL4 = "https://tie.digitraffic.fi/api/weather/v1/forecast-sections-simple";
 
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setShowForecast } = useContext(Citiesopen);
@@ -38,6 +45,7 @@ export default function CameraStations() {
     const [chooseCam, setChooseCam] = useState(false);
     const [chooseWeather, setChooseWeather] = useState(false);
     const [chooseForecast, setChooseForecast] = useState(false);
+
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -189,6 +197,39 @@ export default function CameraStations() {
         setChooseWeather(false);
     };
 
+    useEffect(() => {
+        fetch(URL4)
+            .then(response => response.json())
+            .then(data => {
+                const stations = data.features.filter(station => station.properties.description.includes(chosenCity));
+                const stationIds = stations.map(station => station.id);
+                const stationNames = stations.map(station => station.properties.description);
+                setForecastIds(stationIds);
+                setForecastNames(stationNames);
+            })
+            .catch(error => console.error('Error fetching forecast stations:', error));
+    }, []);
+
+    const handleForecastPress = async (forecastName, index) => {
+        console.log(`Pressed forecast station ${forecastName} with index ${index}`);
+        const forecastId = forecastIds[index];
+        setShowFor(true);
+        fetch(`${URL4}/${forecastId}/forecasts`)
+            .then(response => response.json())
+            .then((json) => {
+                setDesiredForecastValues(json.forecasts);
+            })
+            .catch((error) => {
+                console.error('Error retrieving forecast data:', error);
+            });
+    };
+
+    const handleForecastIdPress = (id) => {
+        setSelectedForecastId(id);
+    };
+
+
+
     return (
         <View style={styles.KymmeniaPaddingeja}>
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
@@ -199,11 +240,11 @@ export default function CameraStations() {
                 </>
             ) :
                 <>
-                <View style={styles.viewi}>
-                <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>Cameras</Text></Pressable>
-                <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>Weather</Text></Pressable>
-                <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>Forecast</Text></Pressable>
-                </View>
+                    <View style={styles.viewi}>
+                        <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>Cameras</Text></Pressable>
+                        <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>Weather</Text></Pressable>
+                        <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>Forecast</Text></Pressable>
+                    </View>
                     {chooseWeather ? (
                         <>
                             <View>
@@ -243,7 +284,7 @@ export default function CameraStations() {
                                 <FlatList
                                     data={stationNames}
                                     renderItem={({ item, index }) => (
-                                        <Pressable onPress={() => handleStationPress(item, stationIds[index])} style={styles.border1}>
+                                        <Pressable onPress={() => handleForecastPress(item, stationIds[index])} style={styles.border1}>
                                             <Text style={styles.textItem1}>{item}</Text>
                                         </Pressable>
                                     )}
@@ -269,8 +310,49 @@ export default function CameraStations() {
                     ) : chooseForecast ? (
                         <>
                             <View>
-                                <Text>Forecast here:</Text>
+                                <Text style={styles.stationText}>Choose a road to see weather from:</Text>
+                                <FlatList
+                                    data={forecastNames}
+                                    renderItem={({ item, index }) => (
+                                        <Pressable onPress={() => handleForecastPress(item, index)} style={styles.border1}>
+                                            <Text style={styles.textItem1}>{item}</Text>
+                                        </Pressable>
+                                    )}
+                                    keyExtractor={(item, index) => index.toString()}
+                                    horizontal={true}
+                                    contentContainerStyle={styles.contentContainer1}
+                                />
                             </View>
+
+                            {showFor && desiredForecastValues && ( // Check if desiredForecastValues is not null or undefined
+                                <>
+                                    <View style={styles.viewi}>
+                                        {[0, 1, 2, 3, 4].map((id) => (
+                                            <Pressable
+                                                key={id}
+                                                style={[styles.border1, selectedForecastId === id && styles.selectedButton]} // Add a style for the selected button
+                                                onPress={() => handleForecastIdPress(id)}
+                                            >
+                                                <Text style={styles.textItem1}>ID {id}</Text>
+                                            </Pressable>
+                                        ))}
+                                    </View>
+                                    <Text style={styles.stationText}>Forecast of chosen road:</Text>
+                                    {desiredForecastValues[selectedForecastId] && (
+                                        <View style={styles.weatherDataItem}>
+                                            <Text style={styles.stationText2}>Forecast Name: {desiredForecastValues[selectedForecastId].forecastName}</Text>
+                                            <Text style={styles.stationText2}>Daylight: {desiredForecastValues[selectedForecastId].daylight.toString()}</Text>
+                                            <Text style={styles.stationText2}>Road Temperature: {desiredForecastValues[selectedForecastId].roadTemperature} °C</Text>
+                                            <Text style={styles.stationText2}>Temperature: {desiredForecastValues[selectedForecastId].temperature} °C</Text>
+                                            <Text style={styles.stationText2}>Overall Road Condition: {desiredForecastValues[selectedForecastId].overallRoadCondition}</Text>
+                                            {desiredForecastValues[selectedForecastId].forecastConditionReason && (
+                                                <Text style={styles.stationText2}>Road Condition Reason: {desiredForecastValues[selectedForecastId].forecastConditionReason.roadCondition}</Text>
+                                            )}
+                                        </View>
+                                    )}
+                                </>
+                            )}
+
                         </>
                     ) : null}
 
