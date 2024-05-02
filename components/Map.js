@@ -46,157 +46,159 @@ export default function Map() {
                     coordinate={{latitude: 61.462733, longitude: 23.769505}}
                     title={"Tampere"}
                     onPress={() => handleMapMarker("Tampere")}
+                    pinColor="blue"
                 />
                 <Marker
                     coordinate={{latitude: 65.0142, longitude: 25.4719}}
                     title={"Oulu"}
                     onPress={() => handleMapMarker("Oulu")}
+                    pinColor="blue"
                 />
                 <Marker
                     coordinate={{latitude: 60.1756, longitude: 24.9342}}
                     title={"Helsinki"}
                     description={"description"}
-                    pinColor="red"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Helsinki")}
                 />
                 <Marker
                     coordinate={{latitude: 62.2333, longitude: 25.7333}}
                     title={"Jyväskylä"}
                     description={"description"}
-                    pinColor="purple"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Jyväskylä")}
                 />
                 <Marker
                     coordinate={{latitude: 66.5028, longitude: 25.7285}}
                     title={"Rovaniemi"}
                     description={"description"}
-                    pinColor="pink"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Rovaniemi")}
                 />
                 <Marker
                     coordinate={{latitude: 62.8925, longitude: 27.6783}}
                     title={"Kuopio"}
                     description={"description"}
-                    pinColor="orange"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Kuopio")}
                 />
                 <Marker
                     coordinate={{latitude: 61.6875, longitude: 27.2736}}
                     title={"Mikkeli"}
                     description={"description"}
-                    pinColor="beige"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Mikkeli")}
                 />
                 <Marker
                     coordinate={{latitude: 60.3000, longitude: 25.0333}}
                     title={"Vantaa"}
                     description={"description"}
-                    pinColor="aqua"
+                    pinColor="cornflowerblue"
                     onPress={() => handleMapMarker("Vantaa")}
                 />
                 <Marker
                     coordinate={{latitude: 60.2100, longitude: 24.6600}}
                     title={"Espoo"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="aqua"
                     onPress={() => handleMapMarker("Espoo")}
                 />
                 <Marker
                     coordinate={{latitude: 60.9804, longitude: 25.6550}}
                     title={"Lahti"}
                     description={"description"}
-                    pinColor="darkgreen"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Lahti")}
                 />
                 <Marker
                     coordinate={{latitude: 61.4847, longitude: 21.7972}}
                     title={"Pori"}
                     description={"description"}
-                    pinColor="maroon"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Pori")}
                 />
                 <Marker
                     coordinate={{latitude: 60.8681, longitude: 26.7042}}
                     title={"Kouvola"}
                     description={"description"}
-                    pinColor="tomato"
+                    pinColor="navy"
                     onPress={() => handleMapMarker("Kouvola")}
                 />
                 <Marker
                     coordinate={{latitude: 60.4517, longitude: 22.2700}}
                     title={"Turku"}
                     description={"description"}
-                    pinColor="maroon"
+                    pinColor="lightseagreen"
                     onPress={() => handleMapMarker("Turku")}
                 />
                 <Marker
                     coordinate={{latitude: 62.6000, longitude: 29.7639}}
                     title={"Joensuu"}
                     description={"description"}
-                    pinColor="magenta"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Joensuu")}
                 />
                 <Marker
                     coordinate={{latitude: 61.0583, longitude: 28.1861}}
                     title={"Lappeenranta"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Lappeenranta")}
                 />
                 <Marker
                     coordinate={{latitude: 61.0000, longitude: 24.4414}}
                     title={"Hämeenlinna"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Hämeenlinna")}
                 />
                 <Marker
                     coordinate={{latitude: 63.1000, longitude: 21.6167}}
                     title={"Vaasa"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Vaasa")}
                 />
                 <Marker
                     coordinate={{latitude: 62.7903, longitude: 22.8403}}
                     title={"Seinäjoki"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Seinäjoki")}
                 />
                 <Marker
                     coordinate={{latitude: 60.4667, longitude: 26.9458}}
                     title={"Kotka"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="cyan"
                     onPress={() => handleMapMarker("Kotka")}
                 />
                 <Marker
                     coordinate={{latitude: 60.3831, longitude: 23.1331}}
                     title={"Salo"}
                     description={"description"}
-                    pinColor="brown"
+                    pinColor="dodgerblue"
                     onPress={() => handleMapMarker("Salo")}
                 />
                 <Marker
                     coordinate={{latitude: 65.9667, longitude: 29.1667}}
                     title={"Kuusamo"}
                     description={"description"}
-                    pinColor="red"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Kuusamo")}
                 />
                 <Marker
                     coordinate={{latitude: 68.9055, longitude: 27.0176}}
                     title={"Inari"}
                     description={"description"}
-                    pinColor="red"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Inari")}
                 />
                 <Marker
                     coordinate={{latitude: 68.3840, longitude: 23.6354}}
                     title={"Enontekiö"}
                     description={"description"}
-                    pinColor="yellow"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Enontekiö")}
                 />
                 <Marker
@@ -217,7 +219,7 @@ export default function Map() {
                     coordinate={{latitude: 64.2597, longitude: 23.9486}}
                     title={"Kalajoki"}
                     description={"description"}
-                    pinColor="tomato"
+                    pinColor="blue"
                     onPress={() => handleMapMarker("Kalajoki")}
                 />
             </MapView>

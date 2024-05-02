@@ -28,7 +28,7 @@ export default function Forecast() {
             <ScrollView>
                 {cities.map(city => (
                     <Pressable key={city} style={styles.border1} onPress={() => navigateToCity(city)}>
-                        <Text>{city}</Text>
+                        <Text style={styles.cities}>{city}</Text>
                     </Pressable>
                 ))}
             </ScrollView>

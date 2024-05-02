@@ -155,4 +155,7 @@ export default StyleSheet.create({
   viewi:{
     flexDirection: 'row',
   },
+  cities:{
+    fontSize: 20,
+  },
   });
