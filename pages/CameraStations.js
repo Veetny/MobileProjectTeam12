@@ -267,9 +267,9 @@ export default function CameraStations() {
                                     <Text style={styles.stationText}>Weather of chosen road:</Text>
                                     {desiredSensorValues.map(sensor => (
                                         <View key={sensor.id} style={styles.weatherDataItem}>
-                                            <Text style={styles.stationText2}>{sensorInfo[sensor.name].title}</Text>
-                                            {sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
-                                            {!sensorInfo[sensor.name].unit && <Text style={styles.stationText2}>{sensor.sensorValueDescriptionEn}</Text>}
+                                            <Text style={styles.stationText}>{sensorInfo[sensor.name].title}</Text>
+                                            {sensorInfo[sensor.name].unit && <Text style={styles.stationText}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
+                                            {!sensorInfo[sensor.name].unit && <Text style={styles.stationText}>{sensor.sensorValueDescriptionEn}</Text>}
                                             {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C and can be slippery, drive cautiously!</Text>}
                                             {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && <Text style={styles.additionalText}>Visibility is below 1 km, drive cautiously!</Text>}
                                         </View>
@@ -296,7 +296,7 @@ export default function CameraStations() {
                             <View style={styles.container}>
                                 {showPic && (
                                     <>
-                                        <Text>Image of chosen road</Text>
+                                        <Text  style={styles.stationText}>Image of chosen road</Text>
                                         <Image
                                             source={{ uri: wcam }}
                                             style={styles.image}
@@ -342,13 +342,13 @@ export default function CameraStations() {
                                     <Text style={styles.stationText}>Forecast of chosen road:</Text>
                                     {desiredForecastValues[selectedForecastId] && (
                                         <View style={styles.weatherDataItem}>
-                                            <Text style={styles.stationText2}>Forecast Name: {desiredForecastValues[selectedForecastId].forecastName}</Text>
-                                            <Text style={styles.stationText2}>Daylight: {desiredForecastValues[selectedForecastId].daylight.toString()}</Text>
-                                            <Text style={styles.stationText2}>Road Temperature: {desiredForecastValues[selectedForecastId].roadTemperature} °C</Text>
-                                            <Text style={styles.stationText2}>Temperature: {desiredForecastValues[selectedForecastId].temperature} °C</Text>
-                                            <Text style={styles.stationText2}>Overall Road Condition: {desiredForecastValues[selectedForecastId].overallRoadCondition}</Text>
+                                            <Text style={styles.stationText}>Forecast Name: {desiredForecastValues[selectedForecastId].forecastName}</Text>
+                                            <Text style={styles.stationText}>Daylight: {desiredForecastValues[selectedForecastId].daylight.toString()}</Text>
+                                            <Text style={styles.stationText}>Road Temperature: {desiredForecastValues[selectedForecastId].roadTemperature} °C</Text>
+                                            <Text style={styles.stationText}>Temperature: {desiredForecastValues[selectedForecastId].temperature} °C</Text>
+                                            <Text style={styles.stationText}>Overall Road Condition: {desiredForecastValues[selectedForecastId].overallRoadCondition}</Text>
                                             {desiredForecastValues[selectedForecastId].forecastConditionReason && (
-                                                <Text style={styles.stationText2}>Road Condition Reason: {desiredForecastValues[selectedForecastId].forecastConditionReason.roadCondition}</Text>
+                                                <Text style={styles.stationText}>Road Condition Reason: {desiredForecastValues[selectedForecastId].forecastConditionReason.roadCondition}</Text>
                                             )}
                                         </View>
                                     )}

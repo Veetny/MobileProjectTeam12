@@ -144,7 +144,8 @@ export default StyleSheet.create({
     margin: 1,
   },
   stationText: {
-    padding: 5
+    padding: 5,
+    color: "white",
   },
   stationText2: {
     paddingLeft: 5
