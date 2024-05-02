@@ -324,7 +324,7 @@ export default function CameraStations() {
                                 />
                             </View>
 
-                            {showFor && desiredForecastValues && ( // Check if desiredForecastValues is not null or undefined
+                            {showFor && desiredForecastValues && (
                                 <>
                                     <View style={styles.viewi}>
                                         {[0, 1, 2, 3, 4].map(id => (
