@@ -157,5 +157,6 @@ export default StyleSheet.create({
   },
   cities:{
     fontSize: 20,
+    margin: 6,
   },
   });
