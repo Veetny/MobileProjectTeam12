@@ -235,7 +235,7 @@ export default function CameraStations() {
             <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
             {isLoading ? (
                 <>
-                    <Text>Loading stations of {chosenCity}...</Text>
+                    <Text style={styles.stationText}>Loading stations of {chosenCity}...</Text>
                     <View style={styles.container}><ActivityIndicator size="large" /></View>
                 </>
             ) :

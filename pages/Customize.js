@@ -1,73 +1,49 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { RadioButton } from 'react-native-paper';
-import styles from "../styles/style";
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-export default function Customize() {
-    const [checked, setChecked] = useState('first');
-    const [blueMode, setBlueMode] = useState(false);
-    const [darkMode, setDarkMode] = useState(false);
+const App = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
 
-    const toggleBlueMode = () => {
-        setBlueMode(!blueMode);
-    };
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-    };
-
-    const containerStyle = () => {
-        if (blueMode) return styles.blueContainer;
-        if (darkMode) return styles.darkContainer;
-        return styles.defaultContainer;
-    };
-
-    const textStyle = () => {
-        if (blueMode) return styles.blueText;
-        if (darkMode) return styles.darkText;
-        return styles.defaultText;
-    };
-
-    return (
-        <View style={[styles.CustomizeContainer, containerStyle()]}>
-            <Text style={textStyle()}>Customize</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <RadioButton
-                    value="first"
-                    status={ checked === 'first' ? 'checked' : 'unchecked' }
-                    onPress={() => {
-                        setChecked('first');
-                        setBlueMode(false);
-                        setDarkMode(false);
-                    }}
-                />
-                <Text style={textStyle()}>Light mode</Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <RadioButton
-                    value="second"
-                    status={ checked === 'second' ? 'checked' : 'unchecked' }
-                    onPress={() => {
-                        setChecked('second');
-                        setBlueMode(true);
-                        setDarkMode(false);
-                    }}
-                />
-                <Text style={textStyle()}>Default</Text>
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <RadioButton
-                    value="third"
-                    status={ checked === 'third' ? 'checked' : 'unchecked' }
-                    onPress={() => {
-                        setChecked('third');
-                        setBlueMode(false);
-                        setDarkMode(true);
-                    }}
-                />
-                <Text style={textStyle()}>Dark mode</Text>
-            </View>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={[styles.radioButton, selectedLanguage === 'en' && styles.selectedButton]}
+        onPress={() => setSelectedLanguage('en')}>
+        <Text style={styles.buttonText}>English</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.radioButton, selectedLanguage === 'fi' && styles.selectedButton]}
+        onPress={() => setSelectedLanguage('fi')}>
+        <Text style={styles.buttonText}>Finnish</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.radioButton, selectedLanguage === 'sv' && styles.selectedButton]}
+        onPress={() => setSelectedLanguage('sv')}>
+        <Text style={styles.buttonText}>Swedish</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  radioButton: {
+    backgroundColor: '#eee',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  selectedButton: {
+    backgroundColor: 'skyblue',
+  },
+  buttonText: {
+    fontSize: 16,
+  },
+});
+
+export default App;

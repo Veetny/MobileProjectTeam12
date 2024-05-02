@@ -21,21 +21,6 @@ export default StyleSheet.create({
       right: 10,
       zIndex: 2,
     },
-    button: {
-
-    },
-    searchBar: {
-      flex: 1,
-      borderRadius: 10,
-      margin: 10,
-      color: '#000',
-      borderColor: '#666',
-      backgroundColor: '#D9D9D9',
-      borderWidth: 1,
-      height: 45,
-      paddingHorizontal: 10,
-      fontSize: 18,
-    },
     drawerContainer: {
       flex: 1,
       backgroundColor: '#45727C',
@@ -73,24 +58,9 @@ export default StyleSheet.create({
         paddingTop: 75,
         backgroundColor: '#45727C',
     },
-    ForecastSearch:{
-        flexDirection: 'column',
-        alignItems: 'center',
-        borderRadius: 10,
-        marginHorizontal: 20,
-        backgroundColor: '#D9D9D9',
-        paddingHorizontal: 10,
-        height: 40,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#666',
-    },
     searchIconFore:{
         marginRight: 8,
         color: '#6C92F3',
-    },
-    searchInputFore: {
-        fontSize: 16,
     },
     listText: {
         marginTop: 10,
