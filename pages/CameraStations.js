@@ -327,13 +327,15 @@ export default function CameraStations() {
                             {showFor && desiredForecastValues && ( // Check if desiredForecastValues is not null or undefined
                                 <>
                                     <View style={styles.viewi}>
-                                        {[0, 1, 2, 3, 4].map((id) => (
+                                        {[0, 1, 2, 3, 4].map(id => (
                                             <Pressable
                                                 key={id}
-                                                style={[styles.border1, selectedForecastId === id && styles.selectedButton]} // Add a style for the selected button
-                                                onPress={() => handleForecastIdPress(id)}
+                                                onPress={() => setSelectedForecastId(id)}
+                                                style={styles.border1}
                                             >
-                                                <Text style={styles.textItem1}>ID {id}</Text>
+                                                <Text style={styles.textItem1}>
+                                                    {id === 0 ? "Current" : id === 4 ? "12 Hours" : `${id * 2} Hours`}
+                                                </Text>
                                             </Pressable>
                                         ))}
                                     </View>
