@@ -2,24 +2,39 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, View, Alert } from "react-native";
 import MapView, { Marker } from 'react-native-maps';
 import styles from "../styles/style";
-import { MapOpen, Citiesopen, CameraStationsOpen, City } from "./Contexts";
+import { MapOpen, Citiesopen, CameraStationsOpen, City,  SelectedLanguage } from "./Contexts";
 
 export default function Map() {
     const { setShowMap } = useContext(MapOpen);
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setChosenCity } = useContext(City);
+    const { selectedLanguage } = useContext(SelectedLanguage);
 
     const handleMapMarker = (cityName) => {
+        const message = {
+            en: `This is a place called: ${cityName}`,
+            sv: `Detta är en plats som ligger i ${cityName}`,
+            fi: `Tämä paikka on nimeltään: ${cityName}`
+        };
+    
         Alert.alert(
             cityName,
-            "This is a place located in Finland",
+            message[selectedLanguage],
             [
                 {
-                    text: "Open selected place",
+                    text: {
+                        en: "Open selected place",
+                        sv: "Öppna vald plats",
+                        fi: "Avaa valittu paikka"
+                    }[selectedLanguage],
                     onPress: () => OpenCities(cityName)
                 },
                 {
-                    text: "Close",
+                    text: {
+                        en: "Close",
+                        sv: "Stäng",
+                        fi: "Sulje"
+                    }[selectedLanguage],
                     onPress: () => console.log("Closed")
                 }
             ]
