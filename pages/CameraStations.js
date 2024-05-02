@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { View, Text, FlatList, Pressable, Image, Button, ActivityIndicator } from "react-native";
 import styles from "../styles/style";
-import { Citiesopen, CameraStationsOpen, City } from '../components/Contexts';
+import { Citiesopen, CameraStationsOpen, City, SelectedLanguage } from '../components/Contexts';
 
 export default function CameraStations() {
     const [weatherCameras, setWeatherCameras] = useState([]);
@@ -21,14 +21,37 @@ export default function CameraStations() {
     const [selectedForecastId, setSelectedForecastId] = useState(0);
 
     const sensorInfo = {
-        "ILMA": { title: "Temperature (air)", unit: "°C" },
-        "TIE_1": { title: "Temperature (road)", unit: "°C" },
-        "NÄKYVYYS_KM": { title: "Visibility in km", unit: "km" },
-        "SADE": { title: "Is it raining?" },
-        "KELI_1": { title: "Road quality" },
-        "ILMAN_LÄMPÖTILA_24H_MIN": { title: "Lowest temperature in last 24H", unit: "°C" }
+        "ILMA": {
+            en: { title: "Temperature (air)", unit: "°C" },
+            sv: { title: "Temperatur (luft)", unit: "°C" },
+            fi: { title: "Lämpötila (ilma)", unit: "°C" }
+        },
+        "TIE_1": {
+            en: { title: "Temperature (road)", unit: "°C" },
+            sv: { title: "Temperatur (väg)", unit: "°C" },
+            fi: { title: "Lämpötila (tie)", unit: "°C" }
+        },
+        "NÄKYVYYS_KM": {
+            en: { title: "Visibility in km", unit: "km" },
+            sv: { title: "Sikt i km", unit: "km" },
+            fi: { title: "Näkyvyys kilometreissä", unit: "km" }
+        },
+        "SADE": {
+            en: { title: "Is it raining?" },
+            sv: { title: "Regnar det?" },
+            fi: { title: "Sataako?" }
+        },
+        "KELI_1": {
+            en: { title: "Road quality" },
+            sv: { title: "Vägkvalitet" },
+            fi: { title: "Tien laatu" }
+        },
+        "ILMAN_LÄMPÖTILA_24H_MIN": {
+            en: { title: "Lowest temperature in last 24H", unit: "°C" },
+            sv: { title: "Lägsta temperatur de senaste 24 timmarna", unit: "°C" },
+            fi: { title: "Alin lämpötila viimeisen 24 tunnin aikana", unit: "°C" }
+        }
     };
-
 
     const URL1 = "https://tie.digitraffic.fi/api/weathercam/v1/stations";
     const URL3 = "https://tie.digitraffic.fi/api/weather/v1/stations";
@@ -37,6 +60,7 @@ export default function CameraStations() {
     const { setShowCameraStations } = useContext(CameraStationsOpen);
     const { setShowForecast } = useContext(Citiesopen);
     const { chosenCity } = useContext(City);
+    const { selectedLanguage } = useContext(SelectedLanguage);
 
     const [showPic, setShowPic] = useState(false);
     const [wcam, setWcam] = useState("./man.png");
@@ -45,7 +69,6 @@ export default function CameraStations() {
     const [chooseCam, setChooseCam] = useState(false);
     const [chooseWeather, setChooseWeather] = useState(false);
     const [chooseForecast, setChooseForecast] = useState(false);
-
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -91,7 +114,7 @@ export default function CameraStations() {
                 try {
                     const response = await fetch(`${URL1}/${id}`);
                     const json = await response.json();
-                    const processedNames = json.properties.names.en;
+                    const processedNames = json.properties.names[selectedLanguage];
                     names.push(processedNames);
                     ids.push(id);
                 } catch (error) {
@@ -106,8 +129,7 @@ export default function CameraStations() {
         if (ouluCameraIds.length > 0) {
             fetchStationNames();
         }
-    }, [ouluCameraIds]);
-
+    }, [ouluCameraIds, selectedLanguage]);
 
     useEffect(() => {
         fetch(URL3)
@@ -131,7 +153,7 @@ export default function CameraStations() {
                 try {
                     const response = await fetch(`${URL3}/${id}`);
                     const json = await response.json();
-                    const processedNames = json.properties.names.en;
+                    const processedNames = json.properties.names[selectedLanguage];
                     names.push(processedNames);
                 } catch (error) {
                     console.error('Error fetching weather names:', error);
@@ -228,27 +250,35 @@ export default function CameraStations() {
         setSelectedForecastId(id);
     };
 
-
+    const getSensorInfo = (sensorName, language) => {
+        const sensor = sensorInfo[sensorName];
+        if (sensor && sensor[language]) {
+            return sensor[language];
+        } else {
+            // Default to English if the specified language is not found
+            return sensor && sensor.en ? sensor.en : { title: '', unit: '' };
+        }
+    };
 
     return (
         <View style={styles.KymmeniaPaddingeja}>
-            <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>Back to cities</Text></Pressable>
+            <Pressable onPress={back} style={styles.buttonColor}><Text style={styles.center}>{selectedLanguage === 'en' ? 'Back to cities' : selectedLanguage === 'sv' ? 'Tillbaka till städer' : 'Takaisin kaupunkeihin'}</Text></Pressable>
             {isLoading ? (
                 <>
-                    <Text style={styles.stationText}>Loading stations of {chosenCity}...</Text>
+                    <Text style={styles.stationText}>{selectedLanguage === 'en' ? `Loading stations of ${chosenCity}...` : selectedLanguage === 'sv' ? `Laddar stationer i ${chosenCity}...` : `Ladataan ${chosenCity} asemia...`}</Text>
                     <View style={styles.container}><ActivityIndicator size="large" /></View>
                 </>
             ) :
                 <>
                     <View style={styles.viewi}>
-                        <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>Cameras</Text></Pressable>
-                        <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>Weather</Text></Pressable>
-                        <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>Forecast</Text></Pressable>
+                        <Pressable style={styles.border1} onPress={camerasChosen}><Text style={styles.textItem1}>{selectedLanguage === 'en' ? 'Cameras' : selectedLanguage === 'sv' ? 'Kameror' : 'Kamerat'}</Text></Pressable>
+                        <Pressable style={styles.border1} onPress={weatherChosen}><Text style={styles.textItem1}>{selectedLanguage === 'en' ? 'Weather' : selectedLanguage === 'sv' ? 'Väder' : 'Sää'}</Text></Pressable>
+                        <Pressable style={styles.border1} onPress={forecastChosen}><Text style={styles.textItem1}>{selectedLanguage === 'en' ? 'Forecast' : selectedLanguage === 'sv' ? 'Prognos' : 'Ennuste'}</Text></Pressable>
                     </View>
                     {chooseWeather ? (
                         <>
                             <View>
-                                <Text style={styles.stationText}>Choose a road to see weather from:</Text>
+                                <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Choose a road to see weather from:' : selectedLanguage === 'sv' ? 'Välj en väg för att se väder från:' : 'Valitse tie nähdäksesi sää:'}</Text>
                                 <FlatList
                                     data={weatherNames}
                                     renderItem={({ item, index }) => (
@@ -264,14 +294,34 @@ export default function CameraStations() {
 
                             {showWeather && (
                                 <>
-                                    <Text style={styles.stationText}>Weather of chosen road:</Text>
+                                    <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Weather of chosen road:' : selectedLanguage === 'sv' ? 'Väder på vald väg:' : 'Valitun tien sää:'}</Text>
                                     {desiredSensorValues.map(sensor => (
                                         <View key={sensor.id} style={styles.weatherDataItem}>
-                                            <Text style={styles.stationText}>{sensorInfo[sensor.name].title}</Text>
-                                            {sensorInfo[sensor.name].unit && <Text style={styles.stationText}>{sensor.value} {sensorInfo[sensor.name].unit}</Text>}
-                                            {!sensorInfo[sensor.name].unit && <Text style={styles.stationText}>{sensor.sensorValueDescriptionEn}</Text>}
-                                            {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && <Text style={styles.additionalText}>Temperature has been below 3°C and can be slippery, drive cautiously!</Text>}
-                                            {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && <Text style={styles.additionalText}>Visibility is below 1 km, drive cautiously!</Text>}
+                                            <Text style={styles.stationText}>{getSensorInfo(sensor.name, selectedLanguage).title}</Text>
+                                            {getSensorInfo(sensor.name, selectedLanguage).unit && (
+                                                <Text style={styles.stationText}>{sensor.value} {getSensorInfo(sensor.name, selectedLanguage).unit}</Text>
+                                            )}
+                                            {!getSensorInfo(sensor.name, selectedLanguage).unit && (
+                                                <Text style={styles.stationText}>{sensor.sensorValueDescriptionEn}</Text>
+                                            )}
+                                            {sensor.name === "ILMAN_LÄMPÖTILA_24H_MIN" && sensor.value < 3 && (
+                                                <Text style={styles.additionalText}>
+                                                    {{
+                                                        en: "Temperature has been below 3°C and can be slippery, drive cautiously!",
+                                                        sv: "Temperaturen har varit under 3°C och kan vara halt, kör försiktigt!",
+                                                        fi: "Lämpötila on ollut alle 3°C asteessa ja voi olla liukasta, aja varovasti!"
+                                                    }[selectedLanguage]}
+                                                </Text>
+                                            )}
+                                            {sensor.name === "NÄKYVYYS_KM" && sensor.value < 1 && (
+                                                <Text style={styles.additionalText}>
+                                                    {{
+                                                        en: "Visibility is below 1 km, drive cautiously!",
+                                                        sv: "Sikt är under 1 km, kör försiktigt!",
+                                                        fi: "Näkyvyys on alle 1 km, aja varovasti!"
+                                                    }[selectedLanguage]}
+                                                </Text>
+                                            )}
                                         </View>
                                     ))}
                                 </>
@@ -280,7 +330,7 @@ export default function CameraStations() {
                     ) : chooseCam ? (
                         <>
                             <View>
-                                <Text style={styles.stationText}>Choose a road to see camera from:</Text>
+                                <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Choose a road to see camera from:' : selectedLanguage === 'sv' ? 'Välj en väg för att se kamera från:' : 'Valitse tie nähdäksesi kameraa:'}</Text>
                                 <FlatList
                                     data={stationNames}
                                     renderItem={({ item, index }) => (
@@ -296,13 +346,13 @@ export default function CameraStations() {
                             <View style={styles.container}>
                                 {showPic && (
                                     <>
-                                        <Text  style={styles.stationText}>Image of chosen road</Text>
+                                        <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Image of chosen road' : selectedLanguage === 'sv' ? 'Bild av vald väg' : 'Valitun tien kuva'}</Text>
                                         <Image
                                             source={{ uri: wcam }}
                                             style={styles.image}
                                             onError={(error) => console.log("Image loading error:", error)}
                                         />
-                                        <Button title="Refresh" onPress={handleRefresh}></Button>
+                                        <Button title={selectedLanguage === 'en' ? 'Refresh' : selectedLanguage === 'sv' ? 'Uppdatera' : 'Päivitä'} onPress={handleRefresh}></Button>
                                     </>
                                 )}
                             </View>
@@ -310,7 +360,7 @@ export default function CameraStations() {
                     ) : chooseForecast ? (
                         <>
                             <View>
-                                <Text style={styles.stationText}>Choose a road to see weather from:</Text>
+                                <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Choose a road to see weather from:' : selectedLanguage === 'sv' ? 'Välj en väg för att se väder från:' : 'Valitse tie nähdäksesi sää:'}</Text>
                                 <FlatList
                                     data={forecastNames}
                                     renderItem={({ item, index }) => (
@@ -334,21 +384,21 @@ export default function CameraStations() {
                                                 style={styles.border1}
                                             >
                                                 <Text style={styles.textItem1}>
-                                                    {id === 0 ? "Current" : id === 4 ? "12 Hours" : `${id * 2} Hours`}
+                                                    {id === 0 ? (selectedLanguage === 'en' ? 'Current' : selectedLanguage === 'sv' ? 'Nuvarande' : 'Nykyinen') : id === 4 ? (selectedLanguage === 'en' ? '12 Hours' : selectedLanguage === 'sv' ? '12 Timmar' : '12 Tuntia') : `${id * 2} ${selectedLanguage === 'en' ? 'Hours' : selectedLanguage === 'sv' ? 'Timmar' : 'Tuntia'}`}
                                                 </Text>
                                             </Pressable>
                                         ))}
                                     </View>
-                                    <Text style={styles.stationText}>Forecast of chosen road:</Text>
+                                    <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Forecast of chosen road:' : selectedLanguage === 'sv' ? 'Prognos för vald väg:' : 'Valitun tien ennuste:'}</Text>
                                     {desiredForecastValues[selectedForecastId] && (
                                         <View style={styles.weatherDataItem}>
-                                            <Text style={styles.stationText}>Forecast Name: {desiredForecastValues[selectedForecastId].forecastName}</Text>
-                                            <Text style={styles.stationText}>Daylight: {desiredForecastValues[selectedForecastId].daylight.toString()}</Text>
-                                            <Text style={styles.stationText}>Road Temperature: {desiredForecastValues[selectedForecastId].roadTemperature} °C</Text>
-                                            <Text style={styles.stationText}>Temperature: {desiredForecastValues[selectedForecastId].temperature} °C</Text>
-                                            <Text style={styles.stationText}>Overall Road Condition: {desiredForecastValues[selectedForecastId].overallRoadCondition}</Text>
+                                            <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Forecast Name' : selectedLanguage === 'sv' ? 'Prognosnamn' : 'Ennusteen nimi'}: {desiredForecastValues[selectedForecastId].forecastName}</Text>
+                                            <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Daylight' : selectedLanguage === 'sv' ? 'Dagsljus' : 'Päivänvalo'}: {desiredForecastValues[selectedForecastId].daylight.toString()}</Text>
+                                            <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Road Temperature' : selectedLanguage === 'sv' ? 'Vägtemperatur' : 'Tien lämpötila'}: {desiredForecastValues[selectedForecastId].roadTemperature} °C</Text>
+                                            <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Temperature' : selectedLanguage === 'sv' ? 'Temperatur' : 'Lämpötila'}: {desiredForecastValues[selectedForecastId].temperature} °C</Text>
+                                            <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Overall Road Condition' : selectedLanguage === 'sv' ? 'Totalt vägläge' : 'Yleinen tiekunto'}: {desiredForecastValues[selectedForecastId].overallRoadCondition}</Text>
                                             {desiredForecastValues[selectedForecastId].forecastConditionReason && (
-                                                <Text style={styles.stationText}>Road Condition Reason: {desiredForecastValues[selectedForecastId].forecastConditionReason.roadCondition}</Text>
+                                                <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Road Condition Reason' : selectedLanguage === 'sv' ? 'Väglägesorsak' : 'Tiekunnon syy'}: {desiredForecastValues[selectedForecastId].forecastConditionReason.roadCondition}</Text>
                                             )}
                                         </View>
                                     )}
@@ -362,4 +412,4 @@ export default function CameraStations() {
             }
         </View>
     );
-}
+}    

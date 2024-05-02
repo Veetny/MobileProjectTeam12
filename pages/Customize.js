@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-
+import { SelectedLanguage } from '../components/Contexts'
 const App = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const {selectedLanguage, setSelectedLanguage} = useContext(SelectedLanguage);
 
   return (
     <View style={styles.container}>
