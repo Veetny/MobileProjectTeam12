@@ -360,7 +360,7 @@ export default function CameraStations() {
                     ) : chooseForecast ? (
                         <>
                             <View>
-                                <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Choose a road to see weather from:' : selectedLanguage === 'sv' ? 'Välj en väg för att se väder från:' : 'Valitse tie nähdäksesi sää:'}</Text>
+                                <Text style={styles.stationText}>{selectedLanguage === 'en' ? 'Choose a road to see forecast from:' : selectedLanguage === 'sv' ? 'Välj en väg för att se väder från:' : 'Valitse tie nähdäksesi sää-ennuste:'}</Text>
                                 <FlatList
                                     data={forecastNames}
                                     renderItem={({ item, index }) => (
