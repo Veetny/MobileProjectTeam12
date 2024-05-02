@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { SelectedLanguage } from '../components/Contexts'
 import styles from '../styles/style';
+
 const App = () => {
   const {selectedLanguage, setSelectedLanguage} = useContext(SelectedLanguage);
 
@@ -15,12 +16,12 @@ const App = () => {
       <TouchableOpacity
         style={[styles.radioButtonCust, selectedLanguage === 'fi' && styles.selectedButtonCust]}
         onPress={() => setSelectedLanguage('fi')}>
-        <Text style={styles.buttonTextCust}>Finnish</Text>
+        <Text style={styles.buttonTextCust}>Suomi</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.radioButtonCust, selectedLanguage === 'sv' && styles.selectedButtonCust]}
         onPress={() => setSelectedLanguage('sv')}>
-        <Text style={styles.buttonTextCust}>Swedish</Text>
+        <Text style={styles.buttonTextCust}>Svenska</Text>
       </TouchableOpacity>
     </View>
   );

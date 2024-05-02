@@ -80,17 +80,35 @@ export default function App() {
                 drawerPosition="left"
                 renderNavigationView={() => (
                   <View style={styles.drawerContainer}>
-                    <Pressable style={styles.buttonColor} onPress={closeDrawer}>
-                      <Text style={styles.buttonText}>Close</Text>
-                    </Pressable>
-                    <Pressable style={styles.buttonColor} onPress={openForecast}>
-                      <Text style={styles.drawerItem}>Cities</Text>
-                    </Pressable>
-                    <Pressable style={styles.buttonColor} onPress={openCustomize}>
-                      <Text style={styles.drawerItem}>Customize</Text>
-                    </Pressable>
+                      <Pressable style={styles.buttonColor} onPress={closeDrawer}>
+                          <Text style={styles.buttonText}>
+                              {{
+                                  en: "Close",
+                                  sv: "Stäng",
+                                  fi: "Sulje"
+                              }[selectedLanguage]}
+                          </Text>
+                      </Pressable>
+                      <Pressable style={styles.buttonColor} onPress={openForecast}>
+                          <Text style={styles.drawerItem}>
+                              {{
+                                  en: "Cities",
+                                  sv: "Städer",
+                                  fi: "Kaupungit"
+                              }[selectedLanguage]}
+                          </Text>
+                      </Pressable>
+                      <Pressable style={styles.buttonColor} onPress={openCustomize}>
+                          <Text style={styles.drawerItem}>
+                              {{
+                                  en: "Customize",
+                                  sv: "Anpassa",
+                                  fi: "Mukauta"
+                              }[selectedLanguage]}
+                          </Text>
+                      </Pressable>
                   </View>
-                )}
+              )}
               >
                 <View style={styles.container}>
                   <StatusBar backgroundColor="#fff" barStyle="dark-content" />
