@@ -284,7 +284,7 @@ export default function CameraStations() {
                                 <FlatList
                                     data={stationNames}
                                     renderItem={({ item, index }) => (
-                                        <Pressable onPress={() => handleForecastPress(item, stationIds[index])} style={styles.border1}>
+                                        <Pressable onPress={() => handleStationPress(item, stationIds[index])} style={styles.border1}>
                                             <Text style={styles.textItem1}>{item}</Text>
                                         </Pressable>
                                     )}

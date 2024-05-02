@@ -64,6 +64,8 @@ export default StyleSheet.create({
     KymmeniaPaddingeja: {
     paddingTop: 100,
     paddingRight: 10,
+    backgroundColor: '#45727C',
+    flex: 1,
     },
     ForecastContainer:{
         flex: 1,
